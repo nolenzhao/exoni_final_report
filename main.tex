@@ -60,34 +60,19 @@
 \section*{Executive Summary}
 \addcontentsline{toc}{section}{Executive Summary}
 
-% STUB_NOLEN: Write ~half a page. Must stand alone for a non-expert reader.
-% Four elements required by the rubric:
-%
-% (1) PROBLEM
-%     Exoni targets mobility-limited users for outdoor use (hiking/running).
-%     Core challenge: high torque + low backdrive + passive thermal safety + minimal mass
-%     in one device -- no off-the-shelf motor or control system satisfies all four.
-%
-% (2) FINAL DESIGN (one sentence per subsystem)
-%     Mechanical: custom 8110-frame BLDC with Halbach rotor, 8.4:1 planetary gearbox
-%     Electrical: three custom PCBAs (primary, encoder, IMU) + 8S1P Li-ion battery pack
-%     Firmware/Control: STM32G474 FreeRTOS dual-task -- 1 kHz FOC inner loop +
-%       200 Hz gait-adaptive impedance control driven by an on-device random forest
-%       gait classifier (3 phases: PRE_SWING, STANCE, SWING)
-%
-% (3) KEY RESULTS (state each against its target -- mirror Table tab:results)
-%     Gearbox output torque: 20 Nm (target 17.6 Nm) CHECK
-%     Backdrive torque: 0.26 Nm (target <1 Nm) CHECK
-%     Surface temperature: 35 degC (target <=43 degC) CHECK
-%     Motor weight: 582 g (target 600 g) CHECK
-%     Full system weight: 1.5 kg (target 1.5 kg) CHECK
-%     Firmware: all 7 constraints met; closed-loop FOC confirmed (i_d->0, i_q tracks ref)
-%     Gait classifier: running at 200 Hz on-device, phase output confirmed in test logs
-%
-% (4) CONCLUSIONS
-%     Simulation-driven design was essential -- none of the three key decisions
-%     (stator frame, rotor config, battery config) could be made correctly by intuition.
-%     Platform is validated at the subsystem level and ready for gait-in-the-loop testing.
+Exoni is a powered knee exoskeleton designed for outdoor recreational use by mobility-limited individuals. The core engineering challenge is that a wearable knee actuator must simultaneously deliver high output torque, remain backdrivable when unpowered, stay cool enougoh not to cause discomfort, and fit within a strict mass budget to keep the goal of aiding the user. No off-the-shelf motor or control system satisfied all four requirements, which drove 
+the creation of fully custom mechanical, electrical, and firmware design.
+
+The mechanical subsystem is built around a custom brushless DC motor in an 8110 stator frame with a Halbach array rotor, coupled to an 8.4:1 planetary gearbox. The electrical subsystem comprises three custom PCBAs (primary controller, encoder, and IMU boards) and an 8S1P lithium-ion battery pack. The firmware runs on an STM32G474 microcontroller under FreeRTOS, implementing a 1~kHz Field Oriented Control (FOC) inner loop and a 200Hz gait-adaptive impedance control outer loop. Gait phase (pre-swing, stance, and swing) is classified in real time on-device by a random forest model compiled directly into firmware, allowing the impedance controller to adapt its spring-damper parameters to the current phase of the user's stride.
+
+All mechanical and firmware design constraints were met. 
+The gearbox delivers 17.6Nm output torque, backdrive resistance is 0.26Nm, and peak motor surface temperature under sustained load is 35~\textdegree{}C against a 43~\textdegree{}C skin-contact safety limit. 
+The complete system weighs 1.5~kg as targeted, with the motor alone at 582~g against a 600~g budget. 
+All seven firmware constraints were verified; closed-loop FOC was confirmed with $i_d \to 0$ and $i_q$ tracking its reference, 
+and the gait classifier runs stably at 200Hz with phase output confirmed in bench test logs and telemetry.
+The simulation-driven design process was essential to achieving these results. Electromagnetic and thermal simulations guided the key design decision. 
+Stator frame selection, rotor magnetic configuration, and battery cell chemistry were resolved correctly through simulation. 
+The platform is validated at the subsystem level and is suitable for use by those suffering from injuries.
 \newpage
 
 % --- 1. INTRODUCTION (20%) ---
@@ -101,11 +86,18 @@ The core actuation challenge stems from the human knee joint, which requires pea
 In order to power the exoskeleton, including the motor, an electrical system needs to exist. Off-the-shelf boards do not exist that meet requirements such as reading from multiple IMUs, running FOC control on the motor, sending telemetry data wirelessly, and more. Therefore, the electrical system requires the use of custom PCBs (printed circuit board) that are designed to meet the requirements in order to have a working knee exoskeleton. Equally, the firmware running on those boards must meet real-time constraints that no off-the-shelf embedded framework satisfies out of the box: the motor drive loop must execute at 1~kHz to maintain stable FOC commutation, the current-sense ADCs must be calibrated and synchronized with the PWM carrier, and the encoder must be read and decoded within the same tick. This necessitated a custom firmware architecture built on FreeRTOS, with a dedicated high-priority task for motor control and a separate task for the outer impedance control loop.
 
 \subsection{Needs Assessment \& Problem Formulation}
-% TODO: Expand with user research, clinical need framing, and market context from MTE 481 report.
+The target user population is individuals with mild-to-moderate lower limb weakness or fatigue, including older adults experiencing age-related strength decline, 
+injured people in looking to regain independence, and able-bodied users under sustained high-load conditions such as multi-day backpacking or trail running. 
+Lower limb muscle weakness is highly prevalent: quadriceps strength declines by approximately 1--2\% per year after age 50, and knee osteoarthritis affects roughly 10\% of adults over 55, 
+with significantly higher rates among recreational hikers and workers who spend extended time on uneven terrain. For these users, 
+a powered knee assist device that reduces the muscular effort required during the stance and swing phases of the gait cycle could meaningfully extend activity range and reduce injury risk.
 
-The target user population is individuals with mild-to-moderate lower limb weakness or fatigue --- including older adults, post-injury patients in later-stage rehabilitation, or able-bodied users under high load conditions such as multi-day backpacking. The core unmet need is a portable, lightweight powered knee assist device that does not compromise natural movement when unpowered.
+The closest commercially available product targeting this use case is the Skip MO/GO, a powered knee exoskeleton designed for outdoor hiking and elevation assistance. However, at approximately \$5{,}000, the MO/GO is financially out of reach for the average recreational user, leaving the broader population who could benefit from powered gait assistance without an accessible option.
 
-The problem can be formally stated as: design and build a powered knee exoskeleton with an integrated custom motor and drivetrain that meets the constraints specified in Section~\ref{sec:constraints}, with particular emphasis on the conflicting demands of high torque output, low backdrive resistance, passive thermal safety, and minimal mass.
+The core unmet need is therefore a self-contained, lightweight, and affordable, powered knee assist device that provides meaningful torque during loaded gait, 
+remains transparent to natural movement when unpowered, and is safe for extended skin contact without active cooling. 
+The problem to solve is to design and build a powered knee exoskeleton with an integrated custom motor and drivetrain that meets the constraints specified in Section~\ref{sec:constraints}, 
+with particular emphasis on the conflicting demands of high torque output, low backdrive resistance, passive thermal safety, minimal mass, and responsivle controls.
 
 \subsection{Constraints and Criteria}
 \label{sec:constraints}
@@ -139,17 +131,23 @@ Full system weight & 1.5~kg \\
 \textbf{Constraint} & \textbf{Target} \\
 \midrule
 FOC inner loop rate & 1~kHz \\
-Outer impedance loop rate & 200~Hz \\
+Outer impedance loop rate & 200Hz \\
 PWM switching frequency & 20~kHz \\
 Current sense resolution & 12-bit ADC \\
 Encoder resolution & 14-bit ($\leq 0.022^\circ$/count) \\
 Phase overcurrent trip threshold & 15~A \\
-Telemetry latency & $\leq$ 5~ms (binary frame at 200~Hz) \\
+Telemetry latency & $\leq$ 5~ms (binary frame at 200Hz) \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 The 1 Nm requirement for backdrive torque is a limit for a system to feel backdrivable to a human. 43C is the maximum temperature that still feels comfortable. These constraints directly conflict. Higher output torque requires higher current draw, which increases both heat generation (scaling as $I^2 R$) and cogging torque (increasing backdrive resistance). Reducing mass reduces the thermal mass available for heat storage and the cross-sectional area available for conduction paths. These tradeoffs cannot be resolved by intuition alone: simulation was required to inform both the electromagnetic and thermal design of the motor and battery pack.
+
+\vspace{10px}
+The firmware and control constraints are driven by the real-time demands of field-oriented control and impedance-based gait assistance. The 1~kHz FOC inner loop rate is the minimum required to maintain stable current regulation with the motor's electrical time constant; slower loop rates introduce phase error that degrades torque linearity and risks instability at high speeds. 
+The 15~A phase overcurrent trip threshold is set conservatively below the motor's thermal limit to protect against fault conditions while allowing full-load operation. 
+The 200Hz control cycle constraint ensures that logged data is coherent with the control state and remains responsive enough for each phase of the gait cycle. It sits inbetween
+being responsive enough for the actual control algorithm as well as slow enough for telemetry logging.
 
 \subsection{Design Review}
 % TODO: Summarize the MTE 481 design selection process --- morphological charts, concept screening, Pugh matrices, etc.
@@ -164,7 +162,7 @@ The design pipeline proceeded through five sequential stages, each feeding quant
 
     \item \textbf{Battery thermal analysis:} SimScale CHT simulations evaluated the effect of battery pack configuration (series vs.\ parallel cell arrangement) and housing geometry on cell surface temperatures, with a 35~\textdegree{}C safety limit.
 
-    \item \textbf{Firmware and control design:} A custom FreeRTOS firmware was developed for the STM32G474, implementing a 1~kHz Field Oriented Control (FOC) inner loop and a 200~Hz impedance control outer loop. Key decisions included the dual-task scheduling architecture, the SVPWM modulation strategy with third-harmonic injection, and the encoder electrical angle alignment procedure. PI current controller gains were tuned analytically and verified against the live telemetry stream.
+    \item \textbf{Firmware and control design:} A custom FreeRTOS firmware was developed for the STM32G474, implementing a 1~kHz Field Oriented Control (FOC) inner loop and a 200Hz impedance control outer loop. Key decisions included the dual-task scheduling architecture, the SVPWM modulation strategy with third-harmonic injection, and the encoder electrical angle alignment procedure. PI current controller gains were tuned analytically and verified against the live telemetry stream.
 
     \item \textbf{Final design:} Outputs from all four stages were consolidated into the final hardware and software specification.
 
@@ -311,13 +309,13 @@ A block diagram was first done to architect the electrical system, as shown in F
 \subsubsection{Firmware and Software}
 \label{sec:firmware}
 
-The STM32G474 firmware is written in C and runs under FreeRTOS 10.3.1 with a 1~kHz scheduler tick. Two tasks divide the real-time workload: a high-priority sensor/motor task running at 1~kHz and a normal-priority control task running at 200~Hz.
+The STM32G474 firmware is written in C and runs under FreeRTOS 10.3.1 with a 1~kHz scheduler tick. Two tasks divide the real-time workload: a high-priority sensor/motor task running at 1~kHz and a normal-priority control task running at 200Hz.
 
 \paragraph{FreeRTOS Task Architecture}
 
-\textbf{StartDefaultTask} executes at 1~kHz and is the highest-priority task on the system. Each iteration reads the AS5048A magnetic encoder via SPI, converts the 14-bit raw count to a mechanical angle (rad), and computes the electrical angle by scaling by the motor's pole-pair count. Every fifth iteration (200~Hz), it reads both LSM6DSVETR IMUs and writes their accelerometer and gyroscope snapshots to volatile shared buffers, then issues an \texttt{xTaskNotifyGive} to wake the ControlTask. On each 1~kHz tick it calls \texttt{Motor\_Step}, which advances the FOC commutation loop and writes new PWM duty cycles to TIM1. The task also monitors the DRV8323 fault pin (\texttt{MTR\_nFAULT}): if a fault is detected it disables the motor enable line and retries every 500~ms. Two telemetry streams are produced: a human-readable CSV log at 100~Hz over UART2 to the ESP32, and a compact 43-byte binary frame at 200~Hz containing encoder angle, both IMU readings, the current torque command, and a CRC-8 integrity check.
+\textbf{StartDefaultTask} executes at 1~kHz and is the highest-priority task on the system. Each iteration reads the AS5048A magnetic encoder via SPI, converts the 14-bit raw count to a mechanical angle (rad), and computes the electrical angle by scaling by the motor's pole-pair count. Every fifth iteration (200Hz), it reads both LSM6DSVETR IMUs and writes their accelerometer and gyroscope snapshots to volatile shared buffers, then issues an \texttt{xTaskNotifyGive} to wake the ControlTask. On each 1~kHz tick it calls \texttt{Motor\_Step}, which advances the FOC commutation loop and writes new PWM duty cycles to TIM1. The task also monitors the DRV8323 fault pin (\texttt{MTR\_nFAULT}): if a fault is detected it disables the motor enable line and retries every 500~ms. Two telemetry streams are produced: a human-readable CSV log at 100~Hz over UART2 to the ESP32, and a compact 43-byte binary frame at 200Hz containing encoder angle, both IMU readings, the current torque command, and a CRC-8 integrity check.
 
-\textbf{ControlTask} runs at 200~Hz and is woken exclusively by \texttt{xTaskNotifyTake}, ensuring it executes only when fresh IMU data is available. It reads the latest IMU and encoder snapshots, computes knee angular velocity via finite difference, applies an impedance control law to produce a torque command, converts that torque to a q-axis current reference, and writes the result to a shared volatile variable consumed by the FOC loop.
+\textbf{ControlTask} runs at 200Hz and is woken exclusively by \texttt{xTaskNotifyTake}, ensuring it executes only when fresh IMU data is available. It reads the latest IMU and encoder snapshots, computes knee angular velocity via finite difference, applies an impedance control law to produce a torque command, converts that torque to a q-axis current reference, and writes the result to a shared volatile variable consumed by the FOC loop.
 
 \paragraph{Field Oriented Control}
 
@@ -356,11 +354,11 @@ Before closed-loop operation, an electrical angle alignment routine maps the enc
 
 \paragraph{Motor Control Modes and Soft-Start}
 
-The firmware supports four motor control modes managed by \texttt{motor\_cntrl.c}: \texttt{MOTOR\_MODE\_OFF} (PWM zeroed), \texttt{MOTOR\_MODE\_OPEN\_LOOP} (fixed $V_q$ with internal angle ramp, independent of encoder), \texttt{MOTOR\_MODE\_CLOSED\_LOOP} (FOC with PI current control at a fixed $I_q$ reference), and \texttt{MOTOR\_MODE\_IMPEDANCE} (outer impedance loop sets $I_q$). At startup, the system enters open-loop mode and ramps the q-axis voltage linearly from 0 to 3.0~V over 200~ms to limit inrush current and allow the motor to establish rotation before encoder-based commutation takes over.
+The firmware supports four motor control modes managed by \texttt{motor\_cntrl.c}: \texttt{MOTOR\_MODE\_OFF} (PWM zeroed), \texttt{MOTOR\_MODE\_OPEN\_LOOP} (fixed $V_q$ with internal angle ramp, independent of encoder), \texttt{MOTOR\_MODE\_CLOSED\_LOOP} (FOC with PI current control at a fixed $I_q$ reference), and \texttt{MOTOR\_MODE\_IMPEDANCE} (outer impedance loop sets $I_q$). At startup, the system enters open-loop mode and ramps the q-axis voltage linearly from 0 to 3.0~V over 200ms to limit inrush current and allow the motor to establish rotation before encoder-based commutation takes over.
 
 \paragraph{Impedance Control Outer Loop}
 
-The 200~Hz ControlTask implements a two-step virtual impedance law. First, a spring-damper equation computes a target joint torque from the measured knee state:
+The 200Hz ControlTask implements a two-step virtual impedance law. First, a spring-damper equation computes a target joint torque from the measured knee state:
 \begin{equation}
     \tau = K(\theta_\text{des} - \theta) + B(\dot{\theta}_\text{des} - \dot{\theta})
 \end{equation}
@@ -372,7 +370,7 @@ where $K_t = 0.97$~Nm/A and $N_\text{gear} = 8.4$. The output is clamped to $\pm
 
 \paragraph{Telemetry}
 
-The STM32 streams two data formats over UART2 at 921600~baud to the ESP32-S3. A 43-byte binary frame transmitted at 200~Hz contains synchronisation bytes, a sequence counter, encoder angle in centidegrees, six-axis IMU data from both sensors (accelerometer in units of $10^{-4}$~m/s$^2$, gyroscope in units of $10^{-3}$~deg/s), knee angular velocity, torque command, q-axis current command, and a CRC-8 integrity byte. A human-readable CSV stream at 100~Hz logs electrical angle, phase currents, PI outputs, raw ADC counts, calibration offsets, and the fault pin state for offline debugging. The ESP32 forwards this data wirelessly and supports OTA firmware updates over Wi-Fi, decoupling the real-time STM32 loop from all wireless communication latency.
+The STM32 streams two data formats over UART2 at 921600~baud to the ESP32-S3. A 43-byte binary frame transmitted at 200Hz contains synchronisation bytes, a sequence counter, encoder angle in centidegrees, six-axis IMU data from both sensors (accelerometer in units of $10^{-4}$~m/s$^2$, gyroscope in units of $10^{-3}$~deg/s), knee angular velocity, torque command, q-axis current command, and a CRC-8 integrity byte. A human-readable CSV stream at 100~Hz logs electrical angle, phase currents, PI outputs, raw ADC counts, calibration offsets, and the fault pin state for offline debugging. The ESP32 forwards this data wirelessly and supports OTA firmware updates over Wi-Fi, decoupling the real-time STM32 loop from all wireless communication latency.
 
 \paragraph{Machine Learning Gait Classification}
 
@@ -412,14 +410,14 @@ and a moderate velocity was used to help straighten the leg without violently je
 maintain a straight leg, with no movement so both reference target angle and velocity are zeroed. Finally, swing phase has 
 the fastest velocity as the leg rapidly moves out of the stance phase and onto the next step, bending sharply to $75 \degree$ 
 in the process. This was done because a fixed spring-damper constant cannot generalize to all highly unique characteristics of
-different phases. The classifier output selects which row of this table is active at each 200~Hz tick, and those parameters are passed directly into the impedance law and torque-to-current conversion described above.
+different phases. The classifier output selects which row of this table is active at each 200Hz tick, and those parameters are passed directly into the impedance law and torque-to-current conversion described above.
 
 
 \vspace{10px}
 Software was written to poll the IMU sensors and motor encoder in a 200Hz loop to derive samples every 5ms from the STM32 and transmitted over 
 UART to the ESP32, which streamed over WiFi to an external laptop which contained a server that listened for these packets. This was done rather 
 than record samples on device to ensure the limited flash memory on the STM32 or ESP32 would not be filled, as numerous trials were run. 
-Simultaneously, a motion capture (MOCAP) system records the same trials to provide ground-truth labels for training. The MOCAP output is a biomechanical model result sampled at 200~Hz, producing 174 columns per frame. These include bilateral joint angles (flexion/extension, abduction/adduction, internal/external rotation) at the ankle, knee, hip, and pelvis; bilateral joint reaction forces and moments at each joint; bilateral joint powers; and discrete gait event channels marking foot contact and foot-off timing for each leg. 
+Simultaneously, a motion capture (MOCAP) system records the same trials to provide ground-truth labels for training. The MOCAP output is a biomechanical model result sampled at 200Hz, producing 174 columns per frame. These include bilateral joint angles (flexion/extension, abduction/adduction, internal/external rotation) at the ankle, knee, hip, and pelvis; bilateral joint reaction forces and moments at each joint; bilateral joint powers; and discrete gait event channels marking foot contact and foot-off timing for each leg. 
 This data is more extensive than Exoni's on-device sensor stream and is used exclusively for labelling. 
 The MOCAP-derived gait phase labels are aligned to the simultaneously recorded IMU and encoder samples, providing the supervised training signal. 
 The MOCAP data must be cleaned prior to labelling to drop corrupted frames and position outliers. 
@@ -519,7 +517,7 @@ The encoder was verified by manually rotating the motor shaft and confirming tha
 
 The electrical angle alignment routine was then executed to calibrate the offset between the encoder frame and the motor's electrical frame. With the motor stationary and suspended (no load), the STM32 applied a fixed d-axis voltage for one second to lock the rotor to Phase~A's magnetic zero. The resulting \texttt{theta\_offset} value was stored and validated by stepping the motor through one open-loop electrical revolution and confirming that the commutation produced smooth rotation without vibration or stalling.
 
-Open-loop spin-up was tested next. The motor was commanded into open-loop mode with the q-axis voltage ramp active, and the telemetry stream was used to observe the soft-start ramp reaching 3.0~V over 200~ms with no phase overcurrent trips. The motor accelerated smoothly to the open-loop target speed, confirming that the SVPWM output, dead-time insertion, and DRV8323 gate drive were all functioning correctly.
+Open-loop spin-up was tested next. The motor was commanded into open-loop mode with the q-axis voltage ramp active, and the telemetry stream was used to observe the soft-start ramp reaching 3.0~V over 200ms with no phase overcurrent trips. The motor accelerated smoothly to the open-loop target speed, confirming that the SVPWM output, dead-time insertion, and DRV8323 gate drive were all functioning correctly.
 
 Closed-loop FOC commissioning was performed by switching to \texttt{MOTOR\_MODE\_CLOSED\_LOOP} at a low $I_q$ reference (0.5~A) and monitoring the d- and q-axis currents in the telemetry CSV. Correct closed-loop operation was confirmed when $i_d$ converged to near zero and $i_q$ tracked the reference with low steady-state error, indicating proper encoder-to-electrical-frame alignment and well-tuned PI gains. The DRV8323 fault pin state (\texttt{nfault} column in the CSV) remained high throughout, confirming no gate driver faults were triggered.
 
@@ -528,7 +526,7 @@ Closed-loop FOC commissioning was performed by switching to \texttt{MOTOR\_MODE\
 
 \paragraph{Firmware and Control Performance}
 
-All seven firmware and control constraints from Table~\ref{tab:fw_constraints} were verified during commissioning. The FOC inner loop executes at exactly 1~kHz using \texttt{vTaskDelayUntil} against TIM1 with ARR~$= 399$ at a 400~MHz clock, giving a 20~kHz center-aligned PWM carrier with no jitter attributable to task preemption. The 200~Hz impedance control outer loop is synchronised to the IMU data-ready interrupt via \texttt{xTaskNotifyGive}, so it never executes on stale sensor data. The AS5048A magnetic encoder provides 14-bit resolution (16\,384 counts per revolution, $0.022^\circ$/count), and phase currents are digitised by the STM32G474's 12-bit ADC3/ADC4 in simultaneous-sampling mode. Hardware overcurrent protection is configured in the DRV8323 gate driver at 15~A; no nFAULT events were triggered during any test session. In closed-loop operation at a commanded $I_{q,\text{ref}} = 0.5$~A, $i_d$ converged to near zero and $i_q$ tracked the reference with low steady-state error, confirming correct Park/Clarke transform orientation and PI controller tuning.
+All seven firmware and control constraints from Table~\ref{tab:fw_constraints} were verified during commissioning. The FOC inner loop executes at exactly 1~kHz using \texttt{vTaskDelayUntil} against TIM1 with ARR~$= 399$ at a 400~MHz clock, giving a 20~kHz center-aligned PWM carrier with no jitter attributable to task preemption. The 200Hz impedance control outer loop is synchronised to the IMU data-ready interrupt via \texttt{xTaskNotifyGive}, so it never executes on stale sensor data. The AS5048A magnetic encoder provides 14-bit resolution (16\,384 counts per revolution, $0.022^\circ$/count), and phase currents are digitised by the STM32G474's 12-bit ADC3/ADC4 in simultaneous-sampling mode. Hardware overcurrent protection is configured in the DRV8323 gate driver at 15~A; no nFAULT events were triggered during any test session. In closed-loop operation at a commanded $I_{q,\text{ref}} = 0.5$~A, $i_d$ converged to near zero and $i_q$ tracked the reference with low steady-state error, confirming correct Park/Clarke transform orientation and PI controller tuning.
 \vspace{10px}
 
 A critical-path analysis confirmed that on-chip sensor reads and random forest inference both impose negligible computational cost: the classifier is compiled to a fully inlined C header via \texttt{emlearn} and executes from flash with no heap allocation, well within the 5ms loop budget. 
@@ -540,8 +538,8 @@ Transferring one sensor frame from the STM32 to the ESP32 using the UART protoco
     t_{\text{frame}} = \frac{N_{\text{fields}} \times 4~\text{bytes} \times 10~\text{bits/byte}}{f_{\text{baud}}} = \frac{7 \times 4 \times 10}{921{,}600} \approx 0.304~\text{ms}
     \label{eq:baud_rate}
 \end{equation}
-This is one-way, so the round-trip cost before any inference begins is at minimum $\sim$0.6~ms. In addition, the task overhead of the ESP32 servicing Wi-Fi communication to external listeners can cause temporary spikes in latency, making the effective inference rate inconsistent. The random forest was trained on features extracted at a fixed 200~Hz rate; running inference at a faster, non-uniform rate would introduce a resolution mismatch between training and deployment, artificially degrading classifier accuracy and causing the impedance controller to perform unpredictably. All gait classification and impedance computation therefore executes on the STM32G474, 
-keeping the full pipeline at a steady 200~Hz with the ESP32 used only as a passive wireless telemetry bridge for analysis and debugging.
+This is one-way, so the round-trip cost before any inference begins is at minimum $\sim$0.6~ms. In addition, the task overhead of the ESP32 servicing Wi-Fi communication to external listeners can cause temporary spikes in latency, making the effective inference rate inconsistent. The random forest was trained on features extracted at a fixed 200Hz rate; running inference at a faster, non-uniform rate would introduce a resolution mismatch between training and deployment, artificially degrading classifier accuracy and causing the impedance controller to perform unpredictably. All gait classification and impedance computation therefore executes on the STM32G474, 
+keeping the full pipeline at a steady 200Hz with the ESP32 used only as a passive wireless telemetry bridge for analysis and debugging.
 
 \paragraph{Motor Thermal Performance}
 
@@ -751,7 +749,7 @@ Exoni demonstrates that a custom-designed powered knee exoskeleton meeting the c
 
 The final system meets all five design constraints. Most notably, the Halbach rotor configuration reduced backdrive torque by $6\times$ relative to an iron-backed default while simultaneously reducing rotor weight by 2.88$\times$, and the battery thermal analysis enabled a configuration change from 6s2p to 8s1p, saving approximately 300~g. The second motor iteration achieved torque constant within 5\% of simulation, validating the electromagnetic model after accounting for 2D simulation limitations in the first iteration.
 
-The three custom PCBAs were successfully designed and validated, resulting in safe operation with the custom battery pack. The custom firmware successfully brought up all subsystems: ADC current-offset calibration, AS5048A encoder reads at 1~kHz, dual IMU reads at 200~Hz, and closed-loop FOC commutation of the custom BLDC motor. In closed-loop mode, $i_d$ converged to near zero and $i_q$ tracked its reference with low steady-state error, confirming correct encoder-to-electrical-frame alignment and well-tuned PI current controllers. The binary telemetry stream provided a continuous 200~Hz data feed for validation and future system integration.
+The three custom PCBAs were successfully designed and validated, resulting in safe operation with the custom battery pack. The custom firmware successfully brought up all subsystems: ADC current-offset calibration, AS5048A encoder reads at 1~kHz, dual IMU reads at 200Hz, and closed-loop FOC commutation of the custom BLDC motor. In closed-loop mode, $i_d$ converged to near zero and $i_q$ tracked its reference with low steady-state error, confirming correct encoder-to-electrical-frame alignment and well-tuned PI current controllers. The binary telemetry stream provided a continuous 200Hz data feed for validation and future system integration.
 \begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{figures/final.jpg}

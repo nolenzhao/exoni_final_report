@@ -1,15 +1,15 @@
 # Fdb version 3
-["bibtex main"] 1775442340 "main.aux" "main.bbl" "main" 1775442344
+["bibtex main"] 1775446406 "main.aux" "main.bbl" "main" 1775446468
   "/usr/share/texlive/texmf-dist/bibtex/bst/ieeetran/IEEEtran.bst" 1440712899 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "main.aux" 1775442343 14542 03d1299e0c0f7badf5f69f0470c8d3af "pdflatex"
+  "main.aux" 1775446468 14545 001b7d60c1c98a6cad42b3245aa0008a "pdflatex"
   "references.bib" 1775425558 204 cdd884d81bd876f4a4e6394fa96aec26 ""
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1775442340 "/home/nolen/School/MTE481/exoni_final_report/main.tex" "main.pdf" "main" 1775442344
+["pdflatex"] 1775446465 "/home/nolen/School/MTE481/exoni_final_report/main.tex" "main.pdf" "main" 1775446468
   "/etc/texmf/web2c/texmf.cnf" 1765438495 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/nolen/.texlive2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1765438791 1405651 7f61c42115a2f70499834c87930f58e8 ""
-  "/home/nolen/School/MTE481/exoni_final_report/main.tex" 1775442343 68188 de3a27a9010a12cfec4521b0fa6d24e6 ""
+  "/home/nolen/School/MTE481/exoni_final_report/main.tex" 1775446465 70650 6efedd21f5a013907c381831becad114 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcbx1095.tfm" 1136768653 1536 0adca69c597a47fe7664bf81057bb53b ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1136768653 1536 02c06700a42be0f5a28664c7273f82e7 ""
@@ -222,11 +222,11 @@
   "figures/temp plot.png" 1775425562 72325 e14644c891a06e464005ce881559a730 ""
   "figures/thermal flow.png" 1775425562 299864 1972afedb481603b86c3bf7be49a11be ""
   "figures/uwlogo.PNG" 1775425558 10558 238ada28f94af33f45808411251e791c ""
-  "main.aux" 1775442343 14542 03d1299e0c0f7badf5f69f0470c8d3af "pdflatex"
-  "main.bbl" 1775442340 877 628a2a8c68e066122d1514411e0b8455 "bibtex main"
-  "main.out" 1775442343 6211 5032662ea49b325367101f681fa32dda "pdflatex"
-  "main.tex" 1775442343 68188 de3a27a9010a12cfec4521b0fa6d24e6 ""
-  "main.toc" 1775442343 4328 55cbd48c9f4f330f388c22c8830befea "pdflatex"
+  "main.aux" 1775446468 14545 001b7d60c1c98a6cad42b3245aa0008a "pdflatex"
+  "main.bbl" 1775446407 877 628a2a8c68e066122d1514411e0b8455 "bibtex main"
+  "main.out" 1775446468 6211 5032662ea49b325367101f681fa32dda "pdflatex"
+  "main.tex" 1775446465 70650 6efedd21f5a013907c381831becad114 ""
+  "main.toc" 1775446468 4329 1b3761bedfababac9165b28ac1820ef9 "pdflatex"
   (generated)
   "main.aux"
   "main.log"
