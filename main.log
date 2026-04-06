@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.12.11)  5 APR 2026 21:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.12.11)  5 APR 2026 22:25
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -816,69 +816,69 @@ File: figures/batteryPackAssembly.png Graphic file (type png)
 <use figures/batteryPackAssembly.png>
 Package pdftex.def Info: figures/batteryPackAssembly.png  used on input line 494.
 (pdftex.def)             Requested size: 234.8775pt x 324.95157pt.
- [20 <./figures/batteryPackAssembly.png>] [21] [22]
-<figures/thermal flow.png, id=355, 1284.8pt x 903.375pt>
+ [20 <./figures/batteryPackAssembly.png>] [21] [22] [23]
+<figures/thermal flow.png, id=362, 1284.8pt x 903.375pt>
 File: figures/thermal flow.png Graphic file (type png)
 <use figures/thermal flow.png>
-Package pdftex.def Info: figures/thermal flow.png  used on input line 612.
+Package pdftex.def Info: figures/thermal flow.png  used on input line 589.
 (pdftex.def)             Requested size: 234.8775pt x 165.13681pt.
-<figures/temp plot.png, id=356, 498.663pt x 353.1594pt>
+<figures/temp plot.png, id=363, 498.663pt x 353.1594pt>
 File: figures/temp plot.png Graphic file (type png)
 <use figures/temp plot.png>
-Package pdftex.def Info: figures/temp plot.png  used on input line 618.
+Package pdftex.def Info: figures/temp plot.png  used on input line 595.
 (pdftex.def)             Requested size: 234.8775pt x 166.34058pt.
- [23] [24 <./figures/thermal flow.png> <./figures/temp plot.png>]
-Overfull \hbox (36.22937pt too wide) in paragraph at lines 635--644
+ [24] [25 <./figures/thermal flow.png> <./figures/temp plot.png>]
+Overfull \hbox (36.22937pt too wide) in paragraph at lines 612--621
  [][] 
  []
 
-<figures/qdd blown up.png, id=377, 867.24pt x 1228.59pt>
+<figures/qdd blown up.png, id=384, 867.24pt x 1228.59pt>
 File: figures/qdd blown up.png Graphic file (type png)
 <use figures/qdd blown up.png>
-Package pdftex.def Info: figures/qdd blown up.png  used on input line 669.
+Package pdftex.def Info: figures/qdd blown up.png  used on input line 646.
 (pdftex.def)             Requested size: 234.8775pt x 332.73605pt.
-<figures/motor.png, id=378, 520.19344pt x 526.96875pt>
+<figures/motor.png, id=385, 520.19344pt x 526.96875pt>
 File: figures/motor.png Graphic file (type png)
 <use figures/motor.png>
-Package pdftex.def Info: figures/motor.png  used on input line 675.
+Package pdftex.def Info: figures/motor.png  used on input line 652.
 (pdftex.def)             Requested size: 234.8775pt x 237.93782pt.
-[25] [26 <./figures/qdd blown up.png> <./figures/motor.png>] [27]
-<figures/final.jpg, id=402, 3083.52pt x 4095.3pt>
+[26] [27 <./figures/qdd blown up.png> <./figures/motor.png>] [28]
+<figures/final.jpg, id=409, 3083.52pt x 4095.3pt>
 File: figures/final.jpg Graphic file (type jpg)
 <use figures/final.jpg>
-Package pdftex.def Info: figures/final.jpg  used on input line 780.
+Package pdftex.def Info: figures/final.jpg  used on input line 757.
 (pdftex.def)             Requested size: 234.8775pt x 311.94592pt.
- [28] [29 <./figures/final.jpg>] [30] [31] [32] (./main.bbl
+ [29] [30 <./figures/final.jpg>] [31] [32] [33] (./main.bbl
 
 LaTeX Warning: Empty `thebibliography' environment on input line 24.
 
-) [33
+) [34
 
 ]
-<figures/blown up.png, id=433, 4974.585pt x 3517.14pt>
+<figures/blown up.png, id=440, 4974.585pt x 3517.14pt>
 File: figures/blown up.png Graphic file (type png)
 <use figures/blown up.png>
-Package pdftex.def Info: figures/blown up.png  used on input line 918.
+Package pdftex.def Info: figures/blown up.png  used on input line 895.
 (pdftex.def)             Requested size: 234.8775pt x 166.0462pt.
- [34
+ [35
 
  <./figures/blown up.png>] (./main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 5032662EA49B325367101F681FA32DDA;6211.
  ) 
 Here is how much of TeX's memory you used:
- 25849 strings out of 480247
- 496915 string characters out of 5896150
- 774291 words of memory out of 5000000
- 43205 multiletter control sequences out of 15000+600000
+ 25852 strings out of 480247
+ 496948 string characters out of 5896150
+ 774350 words of memory out of 5000000
+ 43206 multiletter control sequences out of 15000+600000
  479416 words of font info for 64 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  99i,14n,103p,1174b,1028s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on main.pdf (35 pages, 13967503 bytes).
+Output written on main.pdf (36 pages, 13971526 bytes).
 PDF statistics:
- 541 PDF objects out of 1000 (max. 8388607)
- 441 compressed objects within 5 object streams
- 126 named destinations out of 1000 (max. 500000)
+ 549 PDF objects out of 1000 (max. 8388607)
+ 448 compressed objects within 5 object streams
+ 128 named destinations out of 1000 (max. 500000)
  360 words of extra memory for PDF output out of 10000 (max. 10000000)
 

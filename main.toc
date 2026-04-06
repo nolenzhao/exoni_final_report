@@ -33,20 +33,20 @@
 \contentsline {subsubsection}{\numberline {2.4.3}Firmware Flashing \& Telemetry Check}{21}{subsubsection.2.4.3}%
 \contentsline {subsection}{\numberline {2.5}Testing and Performance}{22}{subsection.2.5}%
 \contentsline {paragraph}{Firmware and Control Performance}{22}{section*.30}%
-\contentsline {paragraph}{Motor Thermal Performance}{22}{section*.31}%
-\contentsline {paragraph}{Battery Thermal Performance}{23}{section*.36}%
-\contentsline {paragraph}{Overall System Performance}{25}{section*.38}%
-\contentsline {section}{\numberline {3}Schedule and Budgeting}{27}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Project Schedule}{27}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Budget: Projected vs. Actual Cost}{28}{subsection.3.2}%
-\contentsline {section}{\numberline {4}Conclusions and Recommendations}{28}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Conclusions}{28}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Recommendations for Future Work}{29}{subsection.4.2}%
-\contentsline {section}{\numberline {5}Teamwork Effort}{30}{section.5}%
-\contentsline {section}{\numberline {6}References}{33}{section.6}%
-\contentsline {section}{References}{33}{section.6}%
-\contentsline {section}{\numberline {A}Detailed Information and Calculations}{34}{appendix.A}%
-\contentsline {subsection}{\numberline {A.1}FOC PI Gain Derivation}{34}{subsection.A.1}%
-\contentsline {subsection}{\numberline {A.2}Gait Feature Vector}{34}{subsection.A.2}%
-\contentsline {subsection}{\numberline {A.3}Impedance Control Torque-to-Current Derivation}{34}{subsection.A.3}%
-\contentsline {section}{\numberline {B}As-Built Engineering Drawings}{34}{appendix.B}%
+\contentsline {paragraph}{Motor Thermal Performance}{23}{section*.31}%
+\contentsline {paragraph}{Battery Thermal Performance}{24}{section*.36}%
+\contentsline {paragraph}{Overall System Performance}{26}{section*.38}%
+\contentsline {section}{\numberline {3}Schedule and Budgeting}{28}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Project Schedule}{28}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Budget: Projected vs. Actual Cost}{29}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Conclusions and Recommendations}{29}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Conclusions}{29}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Recommendations for Future Work}{30}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Teamwork Effort}{31}{section.5}%
+\contentsline {section}{\numberline {6}References}{34}{section.6}%
+\contentsline {section}{References}{34}{section.6}%
+\contentsline {section}{\numberline {A}Detailed Information and Calculations}{35}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}FOC PI Gain Derivation}{35}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}Gait Feature Vector}{35}{subsection.A.2}%
+\contentsline {subsection}{\numberline {A.3}Impedance Control Torque-to-Current Derivation}{35}{subsection.A.3}%
+\contentsline {section}{\numberline {B}As-Built Engineering Drawings}{35}{appendix.B}%
