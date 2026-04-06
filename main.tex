@@ -15,6 +15,7 @@
 \usepackage[all]{hypcap}
 \usepackage{caption}
 \usepackage[nottoc,numbib]{tocbibind}
+\usepackage{gensymb}
 \usepackage{pgfgantt}
 
 \title{Exoni Final Design Report}
@@ -53,6 +54,40 @@
 \pagenumbering{arabic}
 
 \tableofcontents
+\newpage
+
+% --- EXECUTIVE SUMMARY (Front Matter, 4%) ---
+\section*{Executive Summary}
+\addcontentsline{toc}{section}{Executive Summary}
+
+% STUB_NOLEN: Write ~half a page. Must stand alone for a non-expert reader.
+% Four elements required by the rubric:
+%
+% (1) PROBLEM
+%     Exoni targets mobility-limited users for outdoor use (hiking/running).
+%     Core challenge: high torque + low backdrive + passive thermal safety + minimal mass
+%     in one device -- no off-the-shelf motor or control system satisfies all four.
+%
+% (2) FINAL DESIGN (one sentence per subsystem)
+%     Mechanical: custom 8110-frame BLDC with Halbach rotor, 8.4:1 planetary gearbox
+%     Electrical: three custom PCBAs (primary, encoder, IMU) + 8S1P Li-ion battery pack
+%     Firmware/Control: STM32G474 FreeRTOS dual-task -- 1 kHz FOC inner loop +
+%       200 Hz gait-adaptive impedance control driven by an on-device random forest
+%       gait classifier (3 phases: PRE_SWING, STANCE, SWING)
+%
+% (3) KEY RESULTS (state each against its target -- mirror Table tab:results)
+%     Gearbox output torque: 20 Nm (target 17.6 Nm) CHECK
+%     Backdrive torque: 0.26 Nm (target <1 Nm) CHECK
+%     Surface temperature: 35 degC (target <=43 degC) CHECK
+%     Motor weight: 582 g (target 600 g) CHECK
+%     Full system weight: 1.5 kg (target 1.5 kg) CHECK
+%     Firmware: all 7 constraints met; closed-loop FOC confirmed (i_d->0, i_q tracks ref)
+%     Gait classifier: running at 200 Hz on-device, phase output confirmed in test logs
+%
+% (4) CONCLUSIONS
+%     Simulation-driven design was essential -- none of the three key decisions
+%     (stator frame, rotor config, battery config) could be made correctly by intuition.
+%     Platform is validated at the subsystem level and ready for gait-in-the-loop testing.
 \newpage
 
 % --- 1. INTRODUCTION (20%) ---
@@ -325,18 +360,122 @@ The firmware supports four motor control modes managed by \texttt{motor\_cntrl.c
 
 \paragraph{Impedance Control Outer Loop}
 
-The 200~Hz ControlTask implements a virtual impedance law that converts a desired joint stiffness and damping into a q-axis current command:
+The 200~Hz ControlTask implements a two-step virtual impedance law. First, a spring-damper equation computes a target joint torque from the measured knee state:
 \begin{equation}
-    I_q = K(\theta_\text{des} - \theta) - D\,\dot{\theta}
+    \tau = K(\theta_\text{des} - \theta) + B(\dot{\theta}_\text{des} - \dot{\theta})
 \end{equation}
-where $K$ is the virtual stiffness (A/rad), $D$ is the virtual damping (A$\cdot$s/rad), $\theta$ is the measured knee angle, and $\dot{\theta}$ is the finite-difference angular velocity estimate. The current command is passed to the FOC inner loop, which regulates the physical phase currents to track it. Converting $I_q$ to output torque uses the motor torque constant and gearbox ratio: $\tau_\text{output} = K_t \cdot I_q \cdot N_\text{gear}$, where $K_t = 0.110$~Nm/A and $N_\text{gear} = 8.4$.
+where $K$ is the virtual stiffness (Nm/deg), $B$ is the virtual damping (Nm$\cdot$s/deg), $\theta$ is the measured knee angle, $\theta_\text{des}$ is the phase reference angle, and $\dot{\theta}_\text{des}$, $\dot{\theta}$ are the reference and measured knee angular velocities. A backdrive friction compensation term $\tau_\text{bd} = \pm0.26$~Nm is then added to overcome passive gearbox resistance (applied when $|\dot{\theta}| > 5$~deg/s; zero within the deadband to avoid sign-flip). The compensated torque is converted to a q-axis current reference:
+\begin{equation}
+    I_q = \frac{\tau + \tau_\text{bd}}{K_t \cdot N_\text{gear}}
+\end{equation}
+where $K_t = 0.97$~Nm/A and $N_\text{gear} = 8.4$. The output is clamped to $\pm10$~A before being passed to the FOC inner loop, which regulates the physical phase currents to track it.
 
 \paragraph{Telemetry}
 
 The STM32 streams two data formats over UART2 at 921600~baud to the ESP32-S3. A 43-byte binary frame transmitted at 200~Hz contains synchronisation bytes, a sequence counter, encoder angle in centidegrees, six-axis IMU data from both sensors (accelerometer in units of $10^{-4}$~m/s$^2$, gyroscope in units of $10^{-3}$~deg/s), knee angular velocity, torque command, q-axis current command, and a CRC-8 integrity byte. A human-readable CSV stream at 100~Hz logs electrical angle, phase currents, PI outputs, raw ADC counts, calibration offsets, and the fault pin state for offline debugging. The ESP32 forwards this data wirelessly and supports OTA firmware updates over Wi-Fi, decoupling the real-time STM32 loop from all wireless communication latency.
 
+\paragraph{Machine Learning Gait Classification}
+
+The machine learning gait classification is currently built to handle a single type of activity, incline walking. 
+The random forest is built to split the incline walking activity into 3 distinct phases, pre-swing, swing, and stance. 
+The canonical example of incline walking is ascending a flight of stairs. The following described the qualitative characteristics 
+of each phase.
+
+\begin{itemize}
+    \item Pre-swing: Leg is bent and applying force onto the step to raise the body up
+    \item Swing: Leg freely in the air and is rapidly being raised to be placed onto the next step
+    \item Stance: Leg is bearing most of the bodies load, and is fully straight 
+\end{itemize}
+
+Once the random forest classifier identifies the appropriate phase based on the input sensor and motor encoder data,
+the spring damper constants used for the impedance controller are grabbed from a lookup table based on the phase. As described
+above, the spring damper constants used will be different for each phase, as well as each desired knee angle $\theta_\text{des}$ and desired angular velocity $\dot{\theta}_\text{des}$. The per-phase values are summarised in Table~\ref{tab:phase_params}.
+
+\begin{table}[H]
+\centering
+\caption{Per-Phase Impedance Parameters}
+\label{tab:phase_params}
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Phase} & \textbf{$K$ (Nm/deg)} & \textbf{$B$ (Nm$\cdot$s/deg)} & \textbf{$\theta_\text{des}$ (deg)} & \textbf{$\dot{\theta}_\text{des}$ (deg/s)} \\
+\midrule
+PRE\_SWING & 0.08 & 0.001 & 20.0 & 30.0 \\
+STANCE     & 0.15 & 0.002 &  0.0 &  0.0 \\
+SWING      & 0.02 & 0.001 & 75.0 & 80.0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The values were tuned based on the desired qualitative behaviour in each phase of the gait cycle. In the table, 
+the pre-swing phase has a desired thigh-calf target angle of $20 \degree$ to move the leg towards a standing position, 
+and a moderate velocity was used to help straighten the leg without violently jerking. The stance phase aims to help 
+maintain a straight leg, with no movement so both reference target angle and velocity are zeroed. Finally, swing phase has 
+the fastest velocity as the leg rapidly moves out of the stance phase and onto the next step, bending sharply to $75 \degree$ 
+in the process. This was done because a fixed spring-damper constant cannot generalize to all highly unique characteristics of
+different phases. The classifier output selects which row of this table is active at each 200~Hz tick, and those parameters are passed directly into the impedance law and torque-to-current conversion described above.
+
+
+\vspace{10px}
+Software was written to poll the IMU sensors and motor encoder in a 200Hz loop to derive samples every 5ms from the STM32 and transmitted over 
+UART to the ESP32, which streamed over WiFi to an external laptop which contained a server that listened for these packets. This was done rather 
+than record samples on device to ensure the limited flash memory on the STM32 or ESP32 would not be filled, as numerous trials were run. 
+Simultaneously, a motion capture (MOCAP) system records the same trials to provide ground-truth labels for training. The MOCAP output is a biomechanical model result sampled at 200~Hz, producing 174 columns per frame. These include bilateral joint angles (flexion/extension, abduction/adduction, internal/external rotation) at the ankle, knee, hip, and pelvis; bilateral joint reaction forces and moments at each joint; bilateral joint powers; and discrete gait event channels marking foot contact and foot-off timing for each leg. 
+This data is more extensive than Exoni's on-device sensor stream and is used exclusively for labelling. 
+The MOCAP-derived gait phase labels are aligned to the simultaneously recorded IMU and encoder samples, providing the supervised training signal. 
+The MOCAP data must be cleaned prior to labelling to drop corrupted frames and position outliers. 
+A heuristic is developed to label the MOCAP data. 
+It is based off of the maximum point of extension of the leg as captured by the knee angle column (\texttt{LKneeAngles}), 
+combined with the foot contact event markers (\texttt{LFO}, \texttt{LTO}) that record the precise timing of foot-off and toe-off for each stride. 
+A local minimum in knee flexion angle, which corresponds to maximum extension marks the \verb|STANCE phase|. 
+The interval from that extension peak to the subsequent foot-off event is labelled PRE\_SWING, as the leg is still bearing load but beginning to unload. 
+From foot-off until the knee reaches peak flexion on the following step is labelled SWING. 
+This is applied across all trials and then aligned to the concurrently recorded IMU and encoder samples, which 
+is the coress-referencing mentioned earlier. The MOCAP data acts at the ground truth.
+producing a labelled dataset where each 5~ms sample carries one of the three phase labels used to train the random forest.
+
+\vspace{10px}
+
+The labeled dataset is then used to train a \verb|RandomForestClassifier|. 
+Several techniques were applied to improve accuracy and prevent overfitting. 
+First, a group-aware train/test split ensures all samples from a single trial stay entirely within either the training or test partition. 
+This is critical because consecutive 5~ms frames within one trial are temporally correlated. If using naive random split this would allow the model to memorize trial-specific patterns from timestampts and report artificially high accuracy. 
+Second, K-fold cross-validation is used, keeping trial groups intact across folds for the reason above. 
+Third, the classifier is trained to compensate for unequal phase durations inherent in stair gait. 
+Given stance occupies a larger fraction of each cycle than pre-swing or swing, the model is reweighted to not be biased towards predicting the majority class. 
+The features are also normalized to have similar dynamic range among them for preprartiong of quantization where values are scaled.
+Finally quantization of the weights occurs to convert from the default 32-bit floating-point weights 
+to 16-bit integers. This ensures the model size is able to fit inside of the flash memory of the STM32. 
+which maps normalized floats to \texttt{int16} values. This is done by simply multiplying the floats by some static scalar. 
+The trained forest is then exported to a C header via \verb|emlearn|, producing a fully inlined header file, which is compiled directly into the firmware flash. 
+This allows these values to be loaded onto the stack, bypassing the need for heap allocation which can have unpredictable timing 
+due to the memory allocation/deallocation.
+
+\vspace{10px}
+Following these steps to develop the model, the predcition accuracy is about 87\% for all three gait phases.
+
 \subsection{Modifications and Deviations from Original Design}
-% TODO: What changed from the MTE 481 report and why?
+
+Four significant deviations were made from the MTE~481 proposed firmware and control design.
+
+\paragraph{Phase-Adaptive Impedance Control.}
+
+The original design proposed a single fixed set of impedance parameters ($K$, $B$, $\theta_\text{ref}$) applied uniformly throughout the gait cycle.
+In practice, a single parameter set cannot simultaneously provide extension assistance during stance and low resistance during swing, 
+the same stiffness that helps push the knee to full extension during weight-bearing would actively resist the motion of the leg in the air.
+The final implementation dispatches three independent parameter sets (PRE\_SWING, STANCE, SWING) selected in real time by the gait classifier, allowing the controller to provide assistive torque only when and how it is needed.
+
+\paragraph{Random Forest Classifier Over Rule-Based Gait Detection.}
+
+The original design specified a threshold-based phase detector using encoder angle crossings and a velocity sign check.
+This approach is sensitive to sensor noise and does not generalise across subjects or terrain variations such as stair height.
+The final implementation replaces the rule-based detector with a random forest classifier trained on MOCAP-labelled stair-ascent data, which demonstrated improved robustness across trial conditions.
+The switch was enabled by the availability of motion-capture ground-truth labels and the \verb|emlearn| framework for generating inline C.
+
+\paragraph{Two-Layer Current Safety Architecture.}
+The original design specified a single current limit enforced in firmware.
+The final implementation distinguishes two independent protection layers: a hardware overcurrent protection trip at 15~A configured in the DRV8323 gate driver (which requires a fault-clear sequence), and a software torque guard of $\pm$18~Nm with an additional current clamp of $\pm$10~A enforced within the impedance controller.
+The hardware layer now protects against firmware faults while the software layer prevents extreme torque 
+due to sensor noise or classifier error without triggering a full gate-drive shutdown.
 
 \subsection{Construction and Manufacturing}
 \subsubsection{Mechanical Fabrication}
@@ -384,7 +523,48 @@ Open-loop spin-up was tested next. The motor was commanded into open-loop mode w
 
 Closed-loop FOC commissioning was performed by switching to \texttt{MOTOR\_MODE\_CLOSED\_LOOP} at a low $I_q$ reference (0.5~A) and monitoring the d- and q-axis currents in the telemetry CSV. Correct closed-loop operation was confirmed when $i_d$ converged to near zero and $i_q$ tracked the reference with low steady-state error, indicating proper encoder-to-electrical-frame alignment and well-tuned PI gains. The DRV8323 fault pin state (\texttt{nfault} column in the CSV) remained high throughout, confirming no gate driver faults were triggered.
 
+
 \subsection{Testing and Performance}
+
+\paragraph{Firmware and Control Performance}
+
+% STUB_NOLEN: Close the loop on every firmware constraint from Table~\ref{tab:fw_constraints}.
+% Add a table like the one below (adapt tab:results style), then write 1-2 paragraphs.
+%
+% Suggested table structure:
+%
+% \begin{table}[H]
+% \centering
+% \caption{Firmware Constraint Verification}
+% \label{tab:fw_results}
+% \begin{tabular}{llll}
+% \toprule
+% Constraint              & Target          & Achieved        & Evidence \\
+% \midrule
+% FOC inner loop rate     & 1 kHz           & 1 kHz           & vTaskDelayUntil, TIM1 ARR=399 @ 16 MHz \\
+% Outer impedance loop    & 200 Hz          & 200 Hz          & xTaskNotifyGive every 5th tick \\
+% PWM switching freq      & 20 kHz          & 20 kHz          & TIM1 center-aligned, ARR=399 \\
+% Current sense res.      & 12-bit ADC      & 12-bit          & ADC3/ADC4 on STM32G474 \\
+% Encoder resolution      & $\leq$0.022\textdegree/count & 0.022\textdegree/count & AS5048A, 16384 counts/rev \\
+% Phase overcurrent trip  & 15 A            & 15 A            & FOC\_ILIMIT in foc.h \\
+% Telemetry latency       & $\leq$5 ms      & 5 ms frame period & 75-byte frame @ 921600 baud \\
+% \bottomrule
+% \end{tabular}
+% \end{table}
+%
+% Then add 1-2 paragraphs on CLOSED-LOOP FOC VALIDATION:
+% - In closed-loop mode at Iq_ref = 0.5 A: i_d converged to near zero, i_q tracked
+%   reference with low steady-state error (confirm from telemetry CSV logs)
+% - DRV8323 nFAULT pin remained high throughout -- no gate driver faults triggered
+%
+% Then add a paragraph on GAIT CLASSIFIER + IMPEDANCE VALIDATION:
+% - Reference the March 20, 2026 test data (imu_log_20260320_*.csv)
+% - The classifier output (gait_phase column) and control signals (ctrl_tau, ctrl_Iq)
+%   were logged at 200 Hz via the UDP telemetry pipeline
+% - TODO: generate a time-series plot (1 figure) showing gait_phase, ctrl_tau, ctrl_Iq
+%   over ~15 s of walking -- this is your key result figure for the controls section
+% - Comment on whether the impedance limits (+/-18 Nm torque, +/-10 A current) were
+%   ever saturated during the test and what that indicates
 
 \paragraph{Motor Thermal Performance}
 
@@ -607,7 +787,19 @@ Several directions are identified for future development of the Exoni platform.
 
 On the mechanical side, further mass reduction through carbon fibre structural components and a higher gear ratio would improve torque density while reducing overall system weight below 1.5~kg.
 
-On the firmware and control side, the most impactful near-term improvement would be the implementation of sensorless FOC using back-EMF observers, eliminating the encoder cable and connector as a potential failure point in outdoor use. The current impedance control law uses fixed stiffness and damping parameters; a phase-adaptive impedance controller --- varying $K$ and $D$ based on detected gait phase --- would allow the exoskeleton to provide more targeted assistance during stance push-off and swing-phase knee flexion. Additionally, the current PI current controller gains were tuned empirically; a model-based auto-tuning procedure using the identified motor electrical parameters ($R$, $L$) would make commissioning faster and more repeatable for future hardware iterations. Finally, extending the firmware to support bilateral operation (two motor drives communicating over a low-latency bus) and adding a real-time safety monitor for the impedance output bounds would be necessary prerequisites for clinical validation trials.
+On the firmware and control side, the most impactful near-term improvement would be the implementation of sensorless FOC using back-EMF observers, eliminating the encoder cable and connector as a potential failure point in outdoor use. Additionally, the current PI current controller gains were tuned empirically; a model-based auto-tuning procedure using the identified motor electrical parameters ($R$, $L$) would make commissioning faster and more repeatable for future hardware iterations. Extending the firmware to support bilateral operation (two motor drives communicating over a low-latency bus) and adding a real-time safety monitor for the impedance output bounds would be necessary prerequisites for clinical validation trials. The gait classifier was trained on single-subject MOCAP data; expanding the training set to multiple subjects and additional terrain types (stairs, ramps, uneven ground) would improve generalisation. Longer term, an online adaptive impedance update via iterative learning control or reinforcement learning could personalise assistance without manual re-tuning.
+
+The training dataset for the gait classifier consisted of trials from a single subject collected in a single MOCAP session.
+Classifier generalisation is fundamentally limited by training set diversity: a model that has only seen one subject's kinematics will overfit to their specific stride length, cadence, and joint angle ranges.
+Collecting additional MOCAP sessions across multiple subjects, body weights, and stair geometries would directly improve accuracy and lack of samples is likely the reason for current poor accuracy of the model (87 \%).
+Automated labelling via the existing gait event markers (LFO, LTO, RFO, RTO) from MOCAP data makes adding new sessions low-effort once data is collected. The current pipeline will 
+automatically clean and label this mocap data for cross-reference with it's corresponding Exoni on-device data.
+
+The current gait classifier is scoped to a single activity type of stair ascent. 
+A natural extension would be a hierarchical two-stage classification architecture: a top-level activity classifier first identifies the type of locomotion (stair ascent, stair descent, level walking, ramp incline, ramp decline), and a second-stage phase classifier, specific to the identified activity, then segments that activity into its gait phases. 
+This mirrors how biomechanics actually differ across activities. The appropriate impedance parameters for swing phase during stair descent are fundamentally different from those during level walking. 
+Each activity would have its own phase-parameter lookup table, with the top-level classifier gating which table is active. 
+This architecture keeps per-activity models small and interpretable while scaling to arbitrary numbers of activity types without redesigning the control pipeline.
 
 
 % --- 5. TEAMWORK EFFORT (5%) ---
@@ -673,8 +865,53 @@ Nolen Zhao handled the higher level controls algorithm construction and low late
 \section{Detailed Information and Calculations}
 % Full Ansys Maxwell electromagnetic calculation data, SimScale thermal simulation data, battery capacity math, FOC tuning math, etc.
 
+\subsection{FOC PI Gain Derivation}
+% STUB_NOLEN: Show the bandwidth-based tuning calculation.
+% From motor electrical parameters (R = phase resistance, L = phase inductance):
+%   Desired current loop bandwidth: omega_c (rad/s)
+%   Kp = L * omega_c
+%   Ki = R * omega_c
+% Final gains: Kp_d = 0.3, Ki_d = 1.0, Kp_q = 1.0, Ki_q = 100.0
+% Show what omega_c these correspond to and confirm it is well below the 1 kHz loop rate.
+% If gains were tuned empirically (not analytically), state that and describe the process
+% (e.g., step response in telemetry CSV, increased Kp until oscillation, backed off 20%).
+
+\subsection{Gait Feature Vector}
+% STUB_NOLEN: Full 45-feature table. Columns: index, name, type (raw/derived/windowed),
+% units, quantisation scale factor (from GAIT_QUANT_SCALES[] in feature_scales.h).
+% Example rows:
+%   0  enc_deg         raw         deg      91.027
+%   1  imu1_ax         raw         g      8197.488
+%   ...
+%   12 imu2_gz         raw         dps    ...
+%   13 enc_vel         derived     deg/s  ...
+%   19 rel_gyro_z      derived     dps    ...
+%   20 enc_deg_mean    windowed    deg    ...
+%   21 enc_deg_std     windowed    deg    ...
+%   ...
+%   44 imu2_gz_std     windowed    dps    ...
+% Scale factors can be read directly from feature_scales.h in the firmware repo.
+
+\subsection{Impedance Control Torque-to-Current Derivation}
+% STUB_NOLEN: Show the full signal chain:
+%   tau = K*(theta_ref - theta) + B*(omega_ref - omega)      [Nm]
+%   tau_backdrive = 0.26 Nm  if |omega| > 5 deg/s, else 0   [Nm]
+%   I_q = (tau + tau_backdrive) / (K_t * G_ratio)           [A]
+%         K_t = 0.97 Nm/A (measured, 2nd motor iteration)
+%         G_ratio = 8.4
+%   Clamps: tau in [-18, +18] Nm;  I_q in [-10, +10] A
+% State the maximum output torque at the 10 A soft limit:
+%   tau_max = 10 A * 0.97 Nm/A * 8.4 = 81.5 Nm >> 18 Nm saturation limit
+
 \section{As-Built Engineering Drawings}
-Alas, there is no documentation on this matter.
+% TODO: Replace placeholder text. Even a firmware architecture block diagram counts here.
+% Suggested figures to add:
+%   1. FreeRTOS task diagram: StartDefaultTask (1 kHz) and ControlTask (200 Hz),
+%      showing data flow between tasks (shared volatile: ctrl_Iq, gait_phase, etc.)
+%      and the FOC signal chain (ADC -> Clarke -> Park -> PI -> SVPWM -> TIM1)
+%   2. ML pipeline diagram: raw sensors -> feature extraction -> RF classifier ->
+%      phase selection -> impedance law -> I_q -> FOC
+% These can be drawn in draw.io / TikZ / any tool and included as figures.
 
 \begin{figure}
     \centering

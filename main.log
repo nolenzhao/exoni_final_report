@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.12.11)  5 APR 2026 16:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.12.11)  5 APR 2026 21:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -347,6 +347,8 @@ Package tocbibind Info: The document has section divisions on input line 50.
 
 Package tocbibind Note: Using section or other style headings.
 
+) (/usr/share/texlive/texmf-dist/tex/latex/was/gensymb.sty
+Package: gensymb 2003/07/02 v1.0 (WaS)
 ) (/usr/share/texlive/texmf-dist/tex/latex/pgfgantt/pgfgantt.sty
 Package: pgfgantt 2018/01/10 v5.0 Draw Gantt diagrams with TikZ
  (/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
@@ -601,24 +603,24 @@ File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
 ) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 24.
-LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
  (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count343
@@ -676,7 +678,7 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: hypcap package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring OFF on input line 24.
+Package hyperref Info: Link coloring OFF on input line 25.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
  (/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
@@ -686,13 +688,23 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count349
 )
-LaTeX Info: Redefining \ref on input line 24.
-LaTeX Info: Redefining \pageref on input line 24.
-LaTeX Info: Redefining \nameref on input line 24.
+LaTeX Info: Redefining \ref on input line 25.
+LaTeX Info: Redefining \pageref on input line 25.
+LaTeX Info: Redefining \nameref on input line 25.
  (./main.out) (./main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
 
+LaTeX Info: Redefining \celsius on input line 25.
+Package gensymb Info: Faking symbols for \degree and \celsius on input line 25.
+
+
+Package gensymb Warning: Not defining \perthousand.
+
+LaTeX Info: Redefining \ohm on input line 25.
+Package gensymb Info: Using \Omega for \ohm on input line 25.
+
+Package gensymb Warning: Not defining \micro.
 
 
 Package geometry Warning: `lmargin' and `rmargin' result in NEGATIVE (-180.67499pt).
@@ -730,20 +742,20 @@ Package geometry Warning: `lmargin' and `rmargin' result in NEGATIVE (-180.67499
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<figures/uwlogo.PNG, id=126, 200.24812pt x 157.33781pt>
+<figures/uwlogo.PNG, id=142, 200.24812pt x 157.33781pt>
 File: figures/uwlogo.PNG Graphic file (type png)
 <use figures/uwlogo.PNG>
-Package pdftex.def Info: figures/uwlogo.PNG  used on input line 32.
+Package pdftex.def Info: figures/uwlogo.PNG  used on input line 33.
 (pdftex.def)             Requested size: 200.24763pt x 157.33742pt.
 [1
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./figures/uwlogo.PNG>] (./main.toc
-LaTeX Font Info:    Trying to load font information for U+msa on input line 3.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 4.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 4.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
@@ -752,117 +764,121 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \tf@toc=\write5
 \openout5 = `main.toc'.
 
- [2] [3] [4] [5]
-<figures/stator.png, id=206, 295.1025pt x 286.82156pt>
+ [2] [3] [4] [5] [6]
+<figures/stator.png, id=231, 295.1025pt x 286.82156pt>
 File: figures/stator.png Graphic file (type png)
 <use figures/stator.png>
-Package pdftex.def Info: figures/stator.png  used on input line 155.
+Package pdftex.def Info: figures/stator.png  used on input line 190.
 (pdftex.def)             Requested size: 234.8775pt x 228.289pt.
- [6 <./figures/stator.png>]
-<figures/emf.jpg, id=216, 4095.3pt x 3083.52pt>
+ [7 <./figures/stator.png>]
+<figures/emf.jpg, id=240, 4095.3pt x 3083.52pt>
 File: figures/emf.jpg Graphic file (type jpg)
 <use figures/emf.jpg>
-Package pdftex.def Info: figures/emf.jpg  used on input line 185.
+Package pdftex.def Info: figures/emf.jpg  used on input line 220.
 (pdftex.def)             Requested size: 234.8775pt x 176.8164pt.
- [7 <./figures/emf.jpg>]
-<cogging torque.png, id=225, 1337.99875pt x 737.75626pt>
+ [8 <./figures/emf.jpg>]
+<cogging torque.png, id=249, 1337.99875pt x 737.75626pt>
 File: cogging torque.png Graphic file (type png)
 <use cogging torque.png>
-Package pdftex.def Info: cogging torque.png  used on input line 213.
+Package pdftex.def Info: cogging torque.png  used on input line 248.
 (pdftex.def)             Requested size: 234.8775pt x 129.50328pt.
- [8 <./cogging torque.png>]
-<figures/electricalSystemOverview.png, id=235, 2010.51125pt x 1078.0275pt>
+ [9 <./cogging torque.png>]
+<figures/electricalSystemOverview.png, id=259, 2010.51125pt x 1078.0275pt>
 File: figures/electricalSystemOverview.png Graphic file (type png)
 <use figures/electricalSystemOverview.png>
-Package pdftex.def Info: figures/electricalSystemOverview.png  used on input line 243.
+Package pdftex.def Info: figures/electricalSystemOverview.png  used on input line 278.
 (pdftex.def)             Requested size: 469.75502pt x 251.8725pt.
- [9 <./figures/electricalSystemOverview.png>]
-<figures/primaryBoard3D.png, id=245, 1205.50375pt x 417.56pt>
+ [10 <./figures/electricalSystemOverview.png>]
+<figures/primaryBoard3D.png, id=269, 1205.50375pt x 417.56pt>
 File: figures/primaryBoard3D.png Graphic file (type png)
 <use figures/primaryBoard3D.png>
-Package pdftex.def Info: figures/primaryBoard3D.png  used on input line 257.
+Package pdftex.def Info: figures/primaryBoard3D.png  used on input line 292.
 (pdftex.def)             Requested size: 469.75502pt x 162.70757pt.
-<figures/encoderBoard3D.png, id=246, 796.9775pt x 583.17876pt>
+<figures/encoderBoard3D.png, id=270, 796.9775pt x 583.17876pt>
 File: figures/encoderBoard3D.png Graphic file (type png)
 <use figures/encoderBoard3D.png>
-Package pdftex.def Info: figures/encoderBoard3D.png  used on input line 264.
+Package pdftex.def Info: figures/encoderBoard3D.png  used on input line 299.
 (pdftex.def)             Requested size: 375.80544pt x 274.99281pt.
- [10 <./figures/primaryBoard3D.png>]
-<figures/imuBoard3D.png, id=254, 842.14626pt x 633.36626pt>
+ [11 <./figures/primaryBoard3D.png>]
+<figures/imuBoard3D.png, id=278, 842.14626pt x 633.36626pt>
 File: figures/imuBoard3D.png Graphic file (type png)
 <use figures/imuBoard3D.png>
-Package pdftex.def Info: figures/imuBoard3D.png  used on input line 271.
+Package pdftex.def Info: figures/imuBoard3D.png  used on input line 306.
 (pdftex.def)             Requested size: 375.80544pt x 282.63475pt.
- [11 <./figures/encoderBoard3D.png> <./figures/imuBoard3D.png>] [12] [13] [14]
-<figures/batteryPackAssembly.png, id=287, 365.11406pt x 505.13719pt>
+ [12 <./figures/encoderBoard3D.png> <./figures/imuBoard3D.png>] [13] [14] [15] [16] [17]
+Overfull \hbox (16.53203pt too wide) in paragraph at lines 462--466
+ []\OT1/cmr/bx/n/10.95 Phase-Adaptive Impedance Con-trol.[] \OT1/cmr/m/n/10.95 The orig-i-nal de-sign pro-posed a sin-gle fixed set of impedance
+ []
+
+[18] [19]
+<figures/batteryPackAssembly.png, id=337, 365.11406pt x 505.13719pt>
 File: figures/batteryPackAssembly.png Graphic file (type png)
 <use figures/batteryPackAssembly.png>
-Package pdftex.def Info: figures/batteryPackAssembly.png  used on input line 355.
+Package pdftex.def Info: figures/batteryPackAssembly.png  used on input line 494.
 (pdftex.def)             Requested size: 234.8775pt x 324.95157pt.
- [15] [16 <./figures/batteryPackAssembly.png>] [17] [18]
-<figures/thermal flow.png, id=312, 1284.8pt x 903.375pt>
+ [20 <./figures/batteryPackAssembly.png>] [21] [22]
+<figures/thermal flow.png, id=355, 1284.8pt x 903.375pt>
 File: figures/thermal flow.png Graphic file (type png)
 <use figures/thermal flow.png>
-Package pdftex.def Info: figures/thermal flow.png  used on input line 432.
+Package pdftex.def Info: figures/thermal flow.png  used on input line 612.
 (pdftex.def)             Requested size: 234.8775pt x 165.13681pt.
-<figures/temp plot.png, id=313, 498.663pt x 353.1594pt>
+<figures/temp plot.png, id=356, 498.663pt x 353.1594pt>
 File: figures/temp plot.png Graphic file (type png)
 <use figures/temp plot.png>
-Package pdftex.def Info: figures/temp plot.png  used on input line 438.
+Package pdftex.def Info: figures/temp plot.png  used on input line 618.
 (pdftex.def)             Requested size: 234.8775pt x 166.34058pt.
- [19 <./figures/thermal flow.png>]
-Overfull \hbox (36.22937pt too wide) in paragraph at lines 455--464
+ [23] [24 <./figures/thermal flow.png> <./figures/temp plot.png>]
+Overfull \hbox (36.22937pt too wide) in paragraph at lines 635--644
  [][] 
  []
 
-<figures/qdd blown up.png, id=325, 867.24pt x 1228.59pt>
+<figures/qdd blown up.png, id=377, 867.24pt x 1228.59pt>
 File: figures/qdd blown up.png Graphic file (type png)
 <use figures/qdd blown up.png>
-Package pdftex.def Info: figures/qdd blown up.png  used on input line 489.
+Package pdftex.def Info: figures/qdd blown up.png  used on input line 669.
 (pdftex.def)             Requested size: 234.8775pt x 332.73605pt.
-[20 <./figures/temp plot.png>]
-<figures/motor.png, id=335, 520.19344pt x 526.96875pt>
+<figures/motor.png, id=378, 520.19344pt x 526.96875pt>
 File: figures/motor.png Graphic file (type png)
 <use figures/motor.png>
-Package pdftex.def Info: figures/motor.png  used on input line 495.
+Package pdftex.def Info: figures/motor.png  used on input line 675.
 (pdftex.def)             Requested size: 234.8775pt x 237.93782pt.
- [21 <./figures/qdd blown up.png>] [22 <./figures/motor.png>]
-<figures/final.jpg, id=352, 3083.52pt x 4095.3pt>
+[25] [26 <./figures/qdd blown up.png> <./figures/motor.png>] [27]
+<figures/final.jpg, id=402, 3083.52pt x 4095.3pt>
 File: figures/final.jpg Graphic file (type jpg)
 <use figures/final.jpg>
-Package pdftex.def Info: figures/final.jpg  used on input line 600.
+Package pdftex.def Info: figures/final.jpg  used on input line 780.
 (pdftex.def)             Requested size: 234.8775pt x 311.94592pt.
- [23] [24 <./figures/final.jpg>] [25] [26] (./main.bbl
+ [28] [29 <./figures/final.jpg>] [30] [31] [32] (./main.bbl
 
 LaTeX Warning: Empty `thebibliography' environment on input line 24.
 
-) [27
+) [33
 
 ]
-<figures/blown up.png, id=378, 4974.585pt x 3517.14pt>
+<figures/blown up.png, id=433, 4974.585pt x 3517.14pt>
 File: figures/blown up.png Graphic file (type png)
 <use figures/blown up.png>
-Package pdftex.def Info: figures/blown up.png  used on input line 681.
+Package pdftex.def Info: figures/blown up.png  used on input line 918.
 (pdftex.def)             Requested size: 234.8775pt x 166.0462pt.
- [28
+ [34
 
  <./figures/blown up.png>] (./main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 03AF7D829A501324A4438B7C7C600DAC;5442.
+(rerunfilecheck)             Checksum: 5032662EA49B325367101F681FA32DDA;6211.
  ) 
 Here is how much of TeX's memory you used:
- 25762 strings out of 480247
- 495520 string characters out of 5896150
- 769852 words of memory out of 5000000
- 43141 multiletter control sequences out of 15000+600000
- 478795 words of font info for 62 fonts, out of 8000000 for 9000
+ 25849 strings out of 480247
+ 496915 string characters out of 5896150
+ 774291 words of memory out of 5000000
+ 43205 multiletter control sequences out of 15000+600000
+ 479416 words of font info for 64 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 99i,14n,103p,1113b,1028s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on main.pdf (29 pages, 13943984 bytes).
+ 99i,14n,103p,1174b,1028s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb>
+Output written on main.pdf (35 pages, 13967503 bytes).
 PDF statistics:
- 480 PDF objects out of 1000 (max. 8388607)
- 389 compressed objects within 4 object streams
- 109 named destinations out of 1000 (max. 500000)
- 328 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 541 PDF objects out of 1000 (max. 8388607)
+ 441 compressed objects within 5 object streams
+ 126 named destinations out of 1000 (max. 500000)
+ 360 words of extra memory for PDF output out of 10000 (max. 10000000)
 
