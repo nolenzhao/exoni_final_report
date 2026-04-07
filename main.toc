@@ -20,33 +20,36 @@
 \contentsline {paragraph}{Impedance Control Outer Loop}{16}{section*.22}%
 \contentsline {paragraph}{Telemetry}{17}{section*.23}%
 \contentsline {paragraph}{Machine Learning Gait Classification}{17}{section*.24}%
-\contentsline {subsection}{\numberline {2.2}Modifications and Deviations from Original Design}{19}{subsection.2.2}%
-\contentsline {paragraph}{Phase-Adaptive Impedance Control.}{19}{section*.26}%
+\contentsline {subsection}{\numberline {2.2}Modifications and Deviations from Original Design}{20}{subsection.2.2}%
+\contentsline {paragraph}{Phase-Adaptive Impedance Control.}{20}{section*.26}%
 \contentsline {paragraph}{Random Forest Classifier Over Rule-Based Gait Detection.}{20}{section*.27}%
-\contentsline {paragraph}{Two-Layer Current Safety Architecture.}{20}{section*.28}%
-\contentsline {subsection}{\numberline {2.3}Construction and Manufacturing}{20}{subsection.2.3}%
-\contentsline {subsubsection}{\numberline {2.3.1}Mechanical Fabrication}{20}{subsubsection.2.3.1}%
-\contentsline {subsubsection}{\numberline {2.3.2}Electrical Assembly}{20}{subsubsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.4}Commissioning (Component Functional Tests)}{21}{subsection.2.4}%
-\contentsline {subsubsection}{\numberline {2.4.1}Motor Bring-up \& Testing}{21}{subsubsection.2.4.1}%
-\contentsline {subsubsection}{\numberline {2.4.2}PCB \& Battery Bring-up}{21}{subsubsection.2.4.2}%
-\contentsline {subsubsection}{\numberline {2.4.3}Firmware Flashing \& Telemetry Check}{22}{subsubsection.2.4.3}%
-\contentsline {subsection}{\numberline {2.5}Testing and Performance}{23}{subsection.2.5}%
-\contentsline {paragraph}{Firmware and Control Performance}{23}{section*.30}%
-\contentsline {paragraph}{Motor Thermal Performance}{24}{section*.31}%
-\contentsline {paragraph}{Battery Thermal Performance}{25}{section*.36}%
-\contentsline {paragraph}{Overall System Performance}{27}{section*.38}%
-\contentsline {section}{\numberline {3}Schedule and Budgeting}{29}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Project Schedule}{29}{subsection.3.1}%
+\contentsline {paragraph}{Sliding-Window Feature Engineering Over Instantaneous Features.}{20}{section*.28}%
+\contentsline {paragraph}{Two-Layer Current Safety Architecture.}{20}{section*.29}%
+\contentsline {subsection}{\numberline {2.3}Construction and Manufacturing}{21}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Electrical Assembly}{21}{subsubsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.4}Commissioning (Component Functional Tests)}{22}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}Motor Bring-up \& Testing}{22}{subsubsection.2.4.1}%
+\contentsline {subsubsection}{\numberline {2.4.2}PCB \& Battery Bring-up}{22}{subsubsection.2.4.2}%
+\contentsline {subsubsection}{\numberline {2.4.3}Firmware Flashing \& Telemetry Check}{23}{subsubsection.2.4.3}%
+\contentsline {subsection}{\numberline {2.5}Testing and Performance}{24}{subsection.2.5}%
+\contentsline {paragraph}{Firmware and Control Performance}{24}{section*.31}%
+\contentsline {paragraph}{Motor Thermal Performance}{25}{section*.32}%
+\contentsline {paragraph}{Battery Thermal Performance}{26}{section*.37}%
+\contentsline {paragraph}{Overall System Performance}{27}{section*.39}%
+\contentsline {section}{\numberline {3}Schedule and Budgeting}{28}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Project Schedule}{28}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Budget: Projected vs. Actual Cost}{30}{subsection.3.2}%
-\contentsline {section}{\numberline {4}Conclusions and Recommendations}{30}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Conclusions}{30}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Recommendations for Future Work}{31}{subsection.4.2}%
-\contentsline {section}{\numberline {5}Teamwork Effort}{32}{section.5}%
-\contentsline {section}{\numberline {6}References}{35}{section.6}%
-\contentsline {section}{References}{35}{section.6}%
-\contentsline {section}{\numberline {A}Detailed Information and Calculations}{36}{appendix.A}%
-\contentsline {subsection}{\numberline {A.1}FOC PI Gain Derivation}{36}{subsection.A.1}%
-\contentsline {subsection}{\numberline {A.2}Gait Feature Vector}{36}{subsection.A.2}%
-\contentsline {subsection}{\numberline {A.3}Impedance Control Torque-to-Current Derivation}{36}{subsection.A.3}%
-\contentsline {section}{\numberline {B}As-Built Engineering Drawings}{36}{appendix.B}%
+\contentsline {section}{\numberline {4}Conclusions and Recommendations}{31}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Conclusions}{31}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Recommendations for Future Work}{33}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Teamwork Effort}{34}{section.5}%
+\contentsline {section}{\numberline {6}References}{36}{section.6}%
+\contentsline {section}{References}{36}{section.6}%
+\contentsline {section}{\numberline {A}Detailed Information and Calculations}{37}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}FOC PI Gain Derivation}{37}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}Gait Feature Vector}{37}{subsection.A.2}%
+\contentsline {subsection}{\numberline {A.3}Impedance Control Torque-to-Current Derivation}{39}{subsection.A.3}%
+\contentsline {paragraph}{Step 1 — Spring-damper torque.}{39}{section*.47}%
+\contentsline {paragraph}{Step 2 — Backdrive friction compensation.}{39}{section*.48}%
+\contentsline {paragraph}{Step 3 — Torque to q-axis current reference.}{40}{section*.49}%
+\contentsline {section}{\numberline {B}As-Built Engineering Drawings}{40}{appendix.B}%

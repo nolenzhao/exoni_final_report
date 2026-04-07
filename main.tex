@@ -60,7 +60,7 @@
 \section*{Executive Summary}
 \addcontentsline{toc}{section}{Executive Summary}
 
-Exoni is a powered knee exoskeleton designed for outdoor recreational use by mobility-limited individuals. The core engineering challenge is that a wearable knee actuator must simultaneously deliver high output torque, remain backdrivable when unpowered, stay cool enougoh not to cause discomfort, and fit within a strict mass budget to keep the goal of aiding the user. No off-the-shelf motor or control system satisfied all four requirements, which drove 
+Exoni is a powered knee exoskeleton designed for outdoor recreational use by mobility-limited individuals. The core engineering challenge is that a wearable knee actuator must simultaneously deliver high output torque, remain backdrivable when unpowered, stay cool enough not to cause discomfort, and fit within a strict mass budget to keep the goal of aiding the user. No off-the-shelf motor or control system satisfied all four requirements, which drove 
 the creation of fully custom mechanical, electrical, and firmware design.
 
 The mechanical subsystem is built around a custom brushless DC motor in an 8110 stator frame with a Halbach array rotor, coupled to an 8.4:1 planetary gearbox. The electrical subsystem comprises three custom PCBAs (primary controller, encoder, and IMU boards) and an 8S1P lithium-ion battery pack. The firmware runs on an STM32G474 microcontroller under FreeRTOS, implementing a 1~kHz Field Oriented Control (FOC) inner loop and a 200Hz gait-adaptive impedance control outer loop. Gait phase (pre-swing, stance, and swing) is classified in real time on-device by a random forest model compiled directly into firmware, allowing the impedance controller to adapt its spring-damper parameters to the current phase of the user's stride.
@@ -97,7 +97,7 @@ The closest commercially available product targeting this use case is the Skip M
 The core unmet need is therefore a self-contained, lightweight, and affordable, powered knee assist device that provides meaningful torque during loaded gait, 
 remains transparent to natural movement when unpowered, and is safe for extended skin contact without active cooling. 
 The problem to solve is to design and build a powered knee exoskeleton with an integrated custom motor and drivetrain that meets the constraints specified in Section~\ref{sec:constraints}, 
-with particular emphasis on the conflicting demands of high torque output, low backdrive resistance, passive thermal safety, minimal mass, and responsivle controls.
+with particular emphasis on the conflicting demands of high torque output, low backdrive resistance, passive thermal safety, minimal mass, and responsive controls.
 
 \subsection{Constraints and Criteria}
 \label{sec:constraints}
@@ -146,7 +146,7 @@ The 1 Nm requirement for backdrive torque is a limit for a system to feel backdr
 \vspace{10px}
 The firmware and control constraints are driven by the real-time demands of field-oriented control and impedance-based gait assistance. The 1~kHz FOC inner loop rate is the minimum required to maintain stable current regulation with the motor's electrical time constant; slower loop rates introduce phase error that degrades torque linearity and risks instability at high speeds. 
 The 15~A phase overcurrent trip threshold is set conservatively below the motor's thermal limit to protect against fault conditions while allowing full-load operation. 
-The 200Hz control cycle constraint ensures that logged data is coherent with the control state and remains responsive enough for each phase of the gait cycle. It sits inbetween
+The 200Hz control cycle constraint ensures that logged data is coherent with the control state and remains responsive enough for each phase of the gait cycle. It sits in between
 being responsive enough for the actual control algorithm as well as slow enough for telemetry logging.
 
 \subsection{Design Review}
@@ -279,11 +279,11 @@ A block diagram was first done to architect the electrical system, as shown in F
     \end{figure}
     \begin{itemize}
         \item \textbf{Primary Board:} The main board that contains bulk of the exoskeleton's functionality. The board features a BMS (which is composed of a battery monitoring and battery charger IC). The battery charger IC also has power path management, which is important for the USB-C input. USB-PD is used to negotiate more power from the USB-C input's respective source. The BMS automatically handles power path switching, deciding whether the battery or USB-C powers the entire low-voltage system. The low-voltage system composes of two micro-controllers, an STM32G474 and ESP32-S3-MINI-1. The STM32 handles the bulk of the work, where it inferences from the model, reads from the sensors over SPI, and drives the custom motor. The ESP32 deals with the BMS, transmits wireless data, enables OTA, and handles other low-critcal tasks.
-        \item \textbf{Encoder Board:} The encoder board is a board placed by the custom motor, to read encoder/position data which is fed back to the priamry board through a custom shielded JST-XH cable. The encoder data is used for FOC motor control.
+        \item \textbf{Encoder Board:} The encoder board is a board placed by the custom motor, to read encoder/position data which is fed back to the primary board through a custom shielded JST-XH cable. The encoder data is used for FOC motor control.
         \item \textbf{IMU Board:} The IMU board is a small board that only has a IMU, the same one featured in the primary board. This allows to have a IMU by the lower half of the user's leg, which is used to calculate knee angles and have the model recognize the user's gait cycle. It is also connected to the primary board through a custom shielded JST-XH cable.
     \end{itemize}
 
-    All 3 PCBAs were designed using KiCad, an open-source EDA (electronic design automation) tool. The boards were manufactured and assembled by JLCPCB in China. 3D views of the primary, encoder, and IMU board are shown below in Figures \ref{fig:3DPrimary}, \ref{fig:3DEncoder}, and \ref{fig:3DIMU} respectively.
+    Before the final PCBAs were designed, a devboard was built to validate the core microcontroller and sensor stack in firmware prior to committing to the full board layout. All 3 PCBAs were designed using KiCad, an open-source EDA (electronic design automation) tool. The boards were manufactured and assembled by JLCPCB in China. 3D views of the primary, encoder, and IMU board are shown below in Figures \ref{fig:3DPrimary}, \ref{fig:3DEncoder}, and \ref{fig:3DIMU} respectively.
 
     \begin{figure}[H]
         \centering
@@ -315,7 +315,7 @@ The STM32G474 firmware is written in C and runs under FreeRTOS 10.3.1 with a 1~k
 
 \textbf{StartDefaultTask} executes at 1~kHz and is the highest-priority task on the system. Each iteration reads the AS5048A magnetic encoder via SPI, converts the 14-bit raw count to a mechanical angle (rad), and computes the electrical angle by scaling by the motor's pole-pair count. Every fifth iteration (200Hz), it reads both LSM6DSVETR IMUs and writes their accelerometer and gyroscope snapshots to volatile shared buffers, then issues an \texttt{xTaskNotifyGive} to wake the ControlTask. On each 1~kHz tick it calls \texttt{Motor\_Step}, which advances the FOC commutation loop and writes new PWM duty cycles to TIM1. The task also monitors the DRV8323 fault pin (\texttt{MTR\_nFAULT}): if a fault is detected it disables the motor enable line and retries every 500~ms. Two telemetry streams are produced: a human-readable CSV log at 100~Hz over UART2 to the ESP32, and a compact 43-byte binary frame at 200Hz containing encoder angle, both IMU readings, the current torque command, and a CRC-8 integrity check.
 
-\textbf{ControlTask} runs at 200Hz and is woken exclusively by \texttt{xTaskNotifyTake}, ensuring it executes only when fresh IMU data is available. It reads the latest IMU and encoder snapshots, computes knee angular velocity via finite difference, applies an impedance control law to produce a torque command, converts that torque to a q-axis current reference, and writes the result to a shared volatile variable consumed by the FOC loop.
+\textbf{ControlTask} runs at 200Hz and is woken exclusively by \texttt{xTaskNotifyTake}, ensuring it executes only when fresh IMU data is available. It reads the latest IMU and encoder snapshots, computes knee angular velocity via difference, applies an impedance control law to produce a torque command, converts that torque to a q-axis current reference, and writes the result to a shared volatile variable consumed by the FOC loop.
 
 \paragraph{Field Oriented Control}
 
@@ -428,28 +428,32 @@ A local minimum in knee flexion angle, which corresponds to maximum extension ma
 The interval from that extension peak to the subsequent foot-off event is labelled PRE\_SWING, as the leg is still bearing load but beginning to unload. 
 From foot-off until the knee reaches peak flexion on the following step is labelled SWING. 
 This is applied across all trials and then aligned to the concurrently recorded IMU and encoder samples, which 
-is the coress-referencing mentioned earlier. The MOCAP data acts at the ground truth.
+is the cross-referencing mentioned earlier. The MOCAP data acts as the ground truth.
 producing a labelled dataset where each 5~ms sample carries one of the three phase labels used to train the random forest.
 
 \vspace{10px}
 
-The labeled dataset is then used to train a \verb|RandomForestClassifier|. 
-Several techniques were applied to improve accuracy and prevent overfitting. 
-First, a group-aware train/test split ensures all samples from a single trial stay entirely within either the training or test partition. 
-This is critical because consecutive 5~ms frames within one trial are temporally correlated. If using naive random split this would allow the model to memorize trial-specific patterns from timestampts and report artificially high accuracy. 
-Second, K-fold cross-validation is used, keeping trial groups intact across folds for the reason above. 
-Third, the classifier is trained to compensate for unequal phase durations inherent in stair gait. 
-Given stance occupies a larger fraction of each cycle than pre-swing or swing, the model is reweighted to not be biased towards predicting the majority class. 
-The features are also normalized to have similar dynamic range among them for preprartiong of quantization where values are scaled.
-Finally quantization of the weights occurs to convert from the default 32-bit floating-point weights 
-to 16-bit integers. This ensures the model size is able to fit inside of the flash memory of the STM32. 
-which maps normalized floats to \texttt{int16} values. This is done by simply multiplying the floats by some static scalar. 
-The trained forest is then exported to a C header via \verb|emlearn|, producing a fully inlined header file, which is compiled directly into the firmware flash. 
-This allows these values to be loaded onto the stack, bypassing the need for heap allocation which can have unpredictable timing 
-due to the memory allocation/deallocation.
+Before training, the raw sensor stream is expanded into a 45-element feature vector. The first 13 features are instantaneous readings: the encoder angle and the six-axis IMU output from both sensors. Six derived scalar features are then computed from the current sample: encoder angular velocity (difference), the $\ell_2$ acceleration magnitude of each IMU, and the component-wise gyroscope difference between the two IMUs (capturing relative angular velocity between thigh and lower leg). The remaining 26 features are \textbf{windowed statistics} — the per-channel mean and standard deviation computed over a 10-sample (10*5 = 50ms) sliding window applied to the encoder angle and all six axes of both IMUs.
 
-\vspace{10px}
-Following these steps to develop the model, the predcition accuracy is about 87\% for all three gait phases.
+The windowed statistics are the most important addition to the feature set. 
+Instantaneous sensor values at phase boundaries are often ambiguous and could go either way. 
+The knee angle and IMU readings at the moment the foot leaves the ground look similar to those a few milliseconds before or after. 
+The 50ms window mean and standard deviation capture the local trend and time series temporal data of each signal, giving the classifier enough temporal context to distinguish transitions. 
+On the STM32, the window is implemented as a circular buffer (CB) of 10 raw samples. The mean and standard deviation are computed at each tick with no heap allocation due to static CB size. 
+The complete feature vector is featured in Appendix~\ref{sec:gait_feature_vector}.
+
+The labeled dataset is then used to train a \verb|RandomForestClassifier|.
+Several techniques were applied to improve accuracy and prevent overfitting.
+First, a group-aware train/test split ensures all samples from a single trial stay entirely within either the training or test partition.
+This is critical because consecutive 5~ms frames within one trial are temporally correlated. If using a naive random split, the model could memorize trial-specific patterns from timestamps and report artificially high accuracy.
+Second, K-fold cross-validation is used, keeping trial groups intact across folds for the same reason.
+Third, the classifier is trained to compensate for unequal phase durations inherent in stair gait.
+Given that stance occupies a larger fraction of each cycle than pre-swing or swing, the model is reweighted to avoid bias towards the majority class.
+The features are also normalized to have similar dynamic range among them for preparation for quantization, where values are scaled to \texttt{int16} by multiplying by a per-feature scalar derived from the training set's maximum absolute value (see Appendix~\ref{sec:gait_feature_vector}).
+The trained forest is then exported to a C header via \verb|emlearn|, producing a fully inlined header file compiled directly into firmware flash.
+This allows classifier weights to be loaded onto the stack, bypassing heap allocation and its associated unpredictable timing.
+
+Following these steps to develop the model, the prediction accuracy is about 87\% for all three gait phases.
 
 \subsection{Modifications and Deviations from Original Design}
 
@@ -469,6 +473,16 @@ This approach is sensitive to sensor noise and does not generalise across subjec
 The final implementation replaces the rule-based detector with a random forest classifier trained on MOCAP-labelled stair-ascent data, which demonstrated improved robustness across trial conditions.
 The switch was enabled by the availability of motion-capture ground-truth labels and the \verb|emlearn| framework for generating inline C.
 
+\paragraph{Sliding-Window Feature Engineering Over Instantaneous Features.}
+
+The original design was feeding instantaneous sensor readings directly into the gait classifier at each 200Hz tick.
+In practice, phase boundaries are ambiguous in for single samples. 
+The encoder angle and IMU values at the moment the foot leaves the ground are not reliably distinguishable from those a few milliseconds before or after.
+The final implementation augments the 13 element instantaneous single sample feature vector with 26 additional windowed statistics. 
+These are per-channel mean and standard deviation over a 10-sample sliding window, which brings the total feature count to 45.
+The window is maintained as a circular buffer.
+This change alone was responsible for the largest single improvement in classifier accuracy during development even more than adding training samples.
+
 \paragraph{Two-Layer Current Safety Architecture.}
 The original design specified a single current limit enforced in firmware.
 The final implementation distinguishes two independent protection layers: a hardware overcurrent protection trip at 15~A configured in the DRV8323 gate driver (which requires a fault-clear sequence), and a software torque guard of $\pm$18~Nm with an additional current clamp of $\pm$10~A enforced within the impedance controller.
@@ -476,9 +490,6 @@ The hardware layer now protects against firmware faults while the software layer
 due to sensor noise or classifier error without triggering a full gate-drive shutdown.
 
 \subsection{Construction and Manufacturing}
-\subsubsection{Mechanical Fabrication}
-% TODO: Machining, 3D printing, motor assembly (magnet placement for Halbach array).
-
 \subsubsection{Electrical Assembly}
 % TODO: Spot welding the 8S battery pack, PCB assembly/soldering, cable crimping.
 For the PCBAs, the soldering and assembly work was already done by JLCPCB. However, the primary board has exposed copper on the back, and if placed against a conductive material, the board will short. The reason for having copper exposed was for thermal management purposes. Having the copper exposed allows for a low thermal impedance path, as driving the motor with the 6 MOSFETs (which form the 3 half bridges, one half bridge for each motor phase) will create heat depending on how much current runs through them. With the exposed copper, the mechanical frame will act as a heat spreader and keep the primary board within a tolerable temperature range.
@@ -655,9 +666,12 @@ Full system weight & 1.5~kg & 1.5~kg \\
 \section{Schedule and Budgeting}
 
 \subsection{Project Schedule}
-% TODO: Gantt chart review. Milestone tracking. Delay causes.
 
-    Figure \ref{fig:gantt_timeline} below shows the Gantt chart for Exoni's project timeline for developing the mechanical, electrical, and software subsystems.
+    Figure \ref{fig:gantt_timeline} shows the planned project timeline across the three subsystems. The planned schedule targeted PCBA validation by February 15, with all three workstreams converging on a complete integrated system by that date.
+
+    In practice, the final production PCBAs were received from JLCPCB on approximately March 3, slipping roughly two weeks past the planned validation window. 
+    This delay propagated into the firmware and software portions: all firmware development and system-level testing that depended on the final hardware, including the IMU and encoder read validation, the OTA firmware flashing mechanism, STM32 to ESP32 telemetry, MOCAP data collection with simultaneous on-device logging, random forest model training, and control loop tuning (mainly the addition of the 10 sample sliding window and impedance parameter tuning), 
+    was completed between March 3 and the April 6 submission date. The mechanical workstream was not significantly affected, as motor fabrication and characterization were largely complete before the PCBA delay. The overall project completed mostly successfully within the given timeline, with all subsystem constraints verified before submission.
 
     \begin{figure}[H]
     \centering
@@ -711,7 +725,6 @@ Full system weight & 1.5~kg & 1.5~kg \\
     \end{figure}
 
 \subsection{Budget: Projected vs. Actual Cost}
-% TODO: Table comparing expected vs. actual costs.
 \begin{table}[H]
 \centering
 \caption{Projected vs. Actual Budget Breakdown}
@@ -739,6 +752,10 @@ Custom Cables & 60.00 & 120.00 \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+The total project expenditure came in at \$1,965, a \$575 overrun (41\%) against the \$1,390 estimate. The variance was concentrated in the electrical subsystem.
+
+The largest single overrun was the PCBA fabrication and assembly cost (\$650 estimated, \$1,050 actual). This budget line covers both the initial devboard used for early firmware bringup and the three production PCBAs. The initial estimate did not fully account for the component sourcing and assembly complexity of the final boards, which include a high component density on the primary board and required hand-assembled modifications during bringup. Custom cable costs doubled (\$60 estimated, \$120 actual) as more cable runs and connector variants were needed during integration than originally anticipated. Mechanical overruns were minor, with actuator materials, 3D printing, and hardware each coming in slightly over estimate due to additional prototyping iterations.
 
 % --- 4. CONCLUSIONS AND RECOMMENDATIONS (10%) ---
 \section{Conclusions and Recommendations}
@@ -768,7 +785,7 @@ The training dataset for the gait classifier consisted of trials from a single s
 Classifier generalisation is fundamentally limited by training set diversity: a model that has only seen one subject's kinematics will overfit to their specific stride length, cadence, and joint angle ranges.
 Collecting additional MOCAP sessions across multiple subjects, body weights, and stair geometries would directly improve accuracy and lack of samples is likely the reason for current poor accuracy of the model (87 \%).
 Automated labelling via the existing gait event markers (LFO, LTO, RFO, RTO) from MOCAP data makes adding new sessions low-effort once data is collected. The current pipeline will 
-automatically clean and label this mocap data for cross-reference with it's corresponding Exoni on-device data.
+automatically clean and label this mocap data for cross-reference with its corresponding Exoni on-device data.
 
 The current gait classifier is scoped to a single activity type of stair ascent. 
 A natural extension would be a hierarchical two-stage classification architecture: a top-level activity classifier first identifies the type of locomotion (stair ascent, stair descent, level walking, ramp incline, ramp decline), and a second-stage phase classifier, specific to the identified activity, then segments that activity into its gait phases. 
@@ -814,7 +831,7 @@ Hasan Khan handled all firmware and half of embedded software work behind Exoni.
 \item Working with Taim (electrical) to debug hardware/firmware integration.
 \end{itemize}
 
-Nolen Zhao handled the higher level controls algorithm construction and low latency pefromance software. Tasks included: 
+Nolen Zhao handled the higher level controls algorithm construction and low latency performance software. Tasks included: 
 \begin{itemize}
     \item Architecting multi-layer control pipeline for low-latency communication.
     \item Converting raw sensor reads into torque target and current control for input to FOC.
@@ -852,31 +869,103 @@ Nolen Zhao handled the higher level controls algorithm construction and low late
 % (e.g., step response in telemetry CSV, increased Kp until oscillation, backed off 20%).
 
 \subsection{Gait Feature Vector}
-% STUB_NOLEN: Full 45-feature table. Columns: index, name, type (raw/derived/windowed),
-% units, quantisation scale factor (from GAIT_QUANT_SCALES[] in feature_scales.h).
-% Example rows:
-%   0  enc_deg         raw         deg      91.027
-%   1  imu1_ax         raw         g      8197.488
-%   ...
-%   12 imu2_gz         raw         dps    ...
-%   13 enc_vel         derived     deg/s  ...
-%   19 rel_gyro_z      derived     dps    ...
-%   20 enc_deg_mean    windowed    deg    ...
-%   21 enc_deg_std     windowed    deg    ...
-%   ...
-%   44 imu2_gz_std     windowed    dps    ...
-% Scale factors can be read directly from feature_scales.h in the firmware repo.
+\label{sec:gait_feature_vector}
+
+The 45-element feature vector consumed by the on-device random forest classifier is defined in \texttt{gait\_features.h} and \texttt{feature\_scales.h} in the primary-board firmware repository. The vector is computed by \texttt{GaitFeatures\_Update()} at every 200\,Hz tick and quantized to \texttt{int16} before being passed to the random forest classifier. 
+Quantization multiplies each float feature by its per-feature scale factor and rounds to the nearest integer, mapping the expected dynamic range of each signal to the full \texttt{int16} range to maximize fixed-point resolution.
+
+The 45 features decompose into three groups: 13 raw sensor readings, 6 derived scalar features computed from the current sample, 
+and 26 windowed statistics which are the mean and standard deviation over the most recent 10 samples (i.e.\ a 50\,ms sliding window at 200\,Hz). Table \ref{tab:gait_features} lists all features.
+
+\begin{table}[H]
+\centering
+\caption{Gait Classifier Feature Vector (\texttt{GAIT\_N\_FEATURES = 45})}
+\label{tab:gait_features}
+\small
+\begin{tabular}{clllr}
+\toprule
+\textbf{Index} & \textbf{Name} & \textbf{Type} & \textbf{Units} & \textbf{Quant.\ Scale} \\
+\midrule
+ 0  & \texttt{enc\_deg}        & Raw      & deg   &     91.027 \\
+ 1  & \texttt{imu1\_ax}        & Raw      & g     &   8197.488 \\
+ 2  & \texttt{imu1\_ay}        & Raw      & g     &   8878.906 \\
+ 3  & \texttt{imu1\_az}        & Raw      & g     &  11534.605 \\
+ 4  & \texttt{imu1\_gx}        & Raw      & dps   &     20.183 \\
+ 5  & \texttt{imu1\_gy}        & Raw      & dps   &     14.287 \\
+ 6  & \texttt{imu1\_gz}        & Raw      & dps   &     14.287 \\
+ 7  & \texttt{imu2\_ax}        & Raw      & g     &   8254.280 \\
+ 8  & \texttt{imu2\_ay}        & Raw      & g     &   8197.488 \\
+ 9  & \texttt{imu2\_az}        & Raw      & g     &   8197.488 \\
+10  & \texttt{imu2\_gx}        & Raw      & dps   &     18.545 \\
+11  & \texttt{imu2\_gy}        & Raw      & dps   &     14.287 \\
+12  & \texttt{imu2\_gz}        & Raw      & dps   &     14.287 \\
+\midrule
+13  & \texttt{enc\_vel}        & Derived  & deg/s &      0.253 \\
+14  & \texttt{imu1\_acc\_mag}  & Derived  & g     &   5753.554 \\
+15  & \texttt{imu2\_acc\_mag}  & Derived  & g     &   6130.637 \\
+16  & \texttt{rel\_gx}         & Derived  & dps   &     10.581 \\
+17  & \texttt{rel\_gy}         & Derived  & dps   &      8.563 \\
+18  & \texttt{rel\_gz}         & Derived  & dps   &      9.912 \\
+\midrule
+19  & \texttt{enc\_deg\_wmean}    & Windowed & deg   &     91.027 \\
+20  & \texttt{enc\_deg\_wstd}     & Windowed & deg   &    190.459 \\
+21  & \texttt{imu1\_ax\_wmean}    & Windowed & g     &  11087.768 \\
+22  & \texttt{imu1\_ax\_wstd}     & Windowed & g     &  20038.402 \\
+23  & \texttt{imu1\_ay\_wmean}    & Windowed & g     &  11180.750 \\
+24  & \texttt{imu1\_ay\_wstd}     & Windowed & g     &  19399.893 \\
+25  & \texttt{imu1\_az\_wmean}    & Windowed & g     &  18926.785 \\
+26  & \texttt{imu1\_az\_wstd}     & Windowed & g     &  20532.320 \\
+27  & \texttt{imu1\_gx\_wmean}    & Windowed & dps   &     21.024 \\
+28  & \texttt{imu1\_gx\_wstd}     & Windowed & dps   &     50.284 \\
+29  & \texttt{imu1\_gy\_wmean}    & Windowed & dps   &     14.287 \\
+30  & \texttt{imu1\_gy\_wstd}     & Windowed & dps   &     26.418 \\
+31  & \texttt{imu1\_gz\_wmean}    & Windowed & dps   &      3.842 \\
+32  & \texttt{imu1\_gz\_wstd}     & Windowed & dps   &      1.565 \\
+33  & \texttt{imu2\_ax\_wmean}    & Windowed & g     &  13770.198 \\
+34  & \texttt{imu2\_ax\_wstd}     & Windowed & g     &  20462.779 \\
+35  & \texttt{imu2\_ay\_wmean}    & Windowed & g     &  30201.809 \\
+36  & \texttt{imu2\_ay\_wstd}     & Windowed & g     &  16390.729 \\
+37  & \texttt{imu2\_az\_wmean}    & Windowed & g     &   9879.901 \\
+38  & \texttt{imu2\_az\_wstd}     & Windowed & g     &  17823.636 \\
+39  & \texttt{imu2\_gx\_wmean}    & Windowed & dps   &     19.222 \\
+40  & \texttt{imu2\_gx\_wstd}     & Windowed & dps   &     39.562 \\
+41  & \texttt{imu2\_gy\_wmean}    & Windowed & dps   &     14.287 \\
+42  & \texttt{imu2\_gy\_wstd}     & Windowed & dps   &     15.301 \\
+43  & \texttt{imu2\_gz\_wmean}    & Windowed & dps   &     14.287 \\
+44  & \texttt{imu2\_gz\_wstd}     & Windowed & dps   &     29.408 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent\textbf{Raw features (indices 0--12):} The 13 raw features are a direct snapshot of the sensor readings at the current 200\,Hz tick: the knee encoder angle and the three-axis accelerometer and gyroscope readings from both IMUs (IMU1 on the primary board near the motor, IMU2 on the separate IMU board at the lower leg).
+
+\noindent\textbf{Derived features (indices 13--18):} Six scalar quantities computed from the current sample. \texttt{enc\_vel} is the difference of angular velocity of the knee joint ($\Delta\theta / \Delta t$ at 5\,ms). \texttt{imu1\_acc\_mag} and \texttt{imu2\_acc\_mag} are the $\ell_2$ norms of each IMU's accelerometer vector, providing a rotation-invariant measure of total acceleration. \texttt{rel\_gx/gy/gz} are the component-wise differences between IMU1 and IMU2 gyroscope readings, capturing the relative angular velocity between the thigh and lower leg segments.
+
+\noindent\textbf{Windowed features (indices 19--44):} The remaining 26 features are the per-channel windowed mean and standard deviation computed over a 10-sample (50\,ms) sliding window for 13 channels: \texttt{enc\_deg}, \texttt{imu1\_ax/ay/az}, \texttt{imu1\_gx/gy/gz}, \texttt{imu2\_ax/ay/az}, and \texttt{imu2\_gx/gy/gz}. These capture short-term temporal structure that the instantaneous raw readings cannot, allowing the classifier to distinguish phases that have similar instantaneous sensor values but different trends. Scale factors were auto-generated by \texttt{label\_stair\_data.py} from the training dataset's per-feature maximum absolute value.
 
 \subsection{Impedance Control Torque-to-Current Derivation}
-% STUB_NOLEN: Show the full signal chain:
-%   tau = K*(theta_ref - theta) + B*(omega_ref - omega)      [Nm]
-%   tau_backdrive = 0.26 Nm  if |omega| > 5 deg/s, else 0   [Nm]
-%   I_q = (tau + tau_backdrive) / (K_t * G_ratio)           [A]
-%         K_t = 0.97 Nm/A (measured, 2nd motor iteration)
-%         G_ratio = 8.4
-%   Clamps: tau in [-18, +18] Nm;  I_q in [-10, +10] A
-% State the maximum output torque at the 10 A soft limit:
-%   tau_max = 10 A * 0.97 Nm/A * 8.4 = 81.5 Nm >> 18 Nm saturation limit
+
+The calculation from measured knee state to FOC current reference is derived below.
+
+\paragraph{Step 1 — Spring-damper torque.}
+\begin{equation}
+    \tau = K(\theta_\text{des} - \theta) + B(\dot{\theta}_\text{des} - \dot{\theta}) \quad [\text{Nm}]
+\end{equation}
+where $K$ (Nm/deg) and $B$ (Nm$\cdot$s/deg) are the phase-dependent stiffness and damping constants selected from Table~\ref{tab:phase_params}, $\theta$ is the measured knee angle from the encoder (deg), and $\dot{\theta}$ is the finite-difference angular velocity (deg/s). The output $\tau$ is clamped to $\pm18$~Nm before proceeding.
+
+\paragraph{Step 2 — Backdrive friction compensation.}
+
+A fixed term overcomes the measured gearbox resistance:
+\begin{equation}
+    \tau_\text{bd} = \begin{cases} +0.26~\text{Nm} & \dot{\theta} > +5~\text{deg/s} \\ -0.26~\text{Nm} & \dot{\theta} < -5~\text{deg/s} \\ 0 & |\dot{\theta}| \leq 5~\text{deg/s} \end{cases}
+\end{equation}
+The deadband prevents sign-flip chatter when the joint is stationary. The 0.26Nm value is the measured peak cogging torque of the assembled motor and gearbox.
+
+\paragraph{Step 3 — Torque to q-axis current reference.}
+\begin{equation}
+    I_q = \frac{\tau + \tau_\text{bd}}{K_t \cdot N_\text{gear}} \quad [\text{A}]
+\end{equation}
+where $K_t = 0.97$Nm/A is the measured torque constant from the second motor iteration (within 5\% of simulation) and $N_\text{gear} = 8.4$ is the planetary gearbox ratio. The result is clamped to $\pm10$~A before being written to the 1~kHz FOC inner loop.
 
 \section{As-Built Engineering Drawings}
 % TODO: Replace placeholder text. Even a firmware architecture block diagram counts here.
