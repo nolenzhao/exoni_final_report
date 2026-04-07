@@ -28,9 +28,8 @@
 \contentsline {subsection}{\numberline {2.3}Construction and Manufacturing}{21}{subsection.2.3}%
 \contentsline {subsubsection}{\numberline {2.3.1}Electrical Assembly}{21}{subsubsection.2.3.1}%
 \contentsline {subsection}{\numberline {2.4}Commissioning (Component Functional Tests)}{22}{subsection.2.4}%
-\contentsline {subsubsection}{\numberline {2.4.1}Motor Bring-up \& Testing}{22}{subsubsection.2.4.1}%
-\contentsline {subsubsection}{\numberline {2.4.2}PCB \& Battery Bring-up}{22}{subsubsection.2.4.2}%
-\contentsline {subsubsection}{\numberline {2.4.3}Firmware Flashing \& Telemetry Check}{23}{subsubsection.2.4.3}%
+\contentsline {subsubsection}{\numberline {2.4.1}PCB \& Battery Bring-up}{22}{subsubsection.2.4.1}%
+\contentsline {subsubsection}{\numberline {2.4.2}Firmware Flashing \& Telemetry Check}{23}{subsubsection.2.4.2}%
 \contentsline {subsection}{\numberline {2.5}Testing and Performance}{24}{subsection.2.5}%
 \contentsline {paragraph}{Firmware and Control Performance}{24}{section*.31}%
 \contentsline {paragraph}{Motor Thermal Performance}{25}{section*.32}%
@@ -43,6 +42,8 @@
 \contentsline {subsection}{\numberline {4.1}Conclusions}{31}{subsection.4.1}%
 \contentsline {subsection}{\numberline {4.2}Recommendations for Future Work}{33}{subsection.4.2}%
 \contentsline {section}{\numberline {5}Teamwork Effort}{34}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Team Structure and Collaboration}{34}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Individual Contributions}{34}{subsection.5.2}%
 \contentsline {section}{\numberline {6}References}{36}{section.6}%
 \contentsline {section}{References}{36}{section.6}%
 \contentsline {section}{\numberline {A}Detailed Information and Calculations}{37}{appendix.A}%
@@ -53,3 +54,4 @@
 \contentsline {paragraph}{Step 2 — Backdrive friction compensation.}{39}{section*.48}%
 \contentsline {paragraph}{Step 3 — Torque to q-axis current reference.}{40}{section*.49}%
 \contentsline {section}{\numberline {B}As-Built Engineering Drawings}{40}{appendix.B}%
+\contentsline {section}{\numberline {C}Bill of Materials}{46}{appendix.C}%

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.12.11)  6 APR 2026 23:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.12.11)  7 APR 2026 19:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -596,44 +596,78 @@ File: pgfcalendar.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \gtt@calendar@startofweek=\count339
 \gtt@left@slot=\count340
 \gtt@right@slot=\count341
+) (/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+Package: pdfpages 2022/01/29 v0.5u Insert pages of external PDF documents (AM)
+ (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2020/11/24 v1.1c Standard LaTeX ifthen package (DPC)
+) (/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count342
+\calc@Bcount=\count343
+\calc@Adimen=\dimen297
+\calc@Bdimen=\dimen298
+\calc@Askip=\skip67
+\calc@Bskip=\skip68
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count344
+\calc@Cskip=\skip69
+) (/usr/share/texlive/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+Package: eso-pic 2020/10/14 v3.0a eso-pic (RN)
+\ESO@tempdima=\dimen299
+\ESO@tempdimb=\dimen300
+)
+\AM@pagewidth=\dimen301
+\AM@pageheight=\dimen302
+\AM@fboxrule=\dimen303
+ (/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pppdftex.def
+File: pppdftex.def 2022/01/29 v0.5u Pdfpages driver for pdfTeX (AM)
+)
+\pdfpages@includegraphics@status=\count345
+\AM@pagebox=\box69
+\AM@global@opts=\toks42
+\AM@pagecnt=\count346
+\AM@toc@title=\toks43
+\c@AM@survey=\count347
+\AM@templatesizebox=\box70
 ) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count342
-\l__pdf_internal_box=\box69
+\l__color_backend_stack_int=\count348
+\l__pdf_internal_box=\box71
 ) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
  (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count343
-\scratchdimen=\dimen297
-\scratchbox=\box70
-\nofMPsegments=\count344
-\nofMParguments=\count345
-\everyMPshowfont=\toks42
-\MPscratchCnt=\count346
-\MPscratchDim=\dimen298
-\MPnumerator=\count347
-\makeMPintoPDFobject=\count348
-\everyMPtoPDFconversion=\toks43
+\scratchcounter=\count349
+\scratchdimen=\dimen304
+\scratchbox=\box72
+\nofMPsegments=\count350
+\nofMParguments=\count351
+\everyMPshowfont=\toks44
+\MPscratchCnt=\count352
+\MPscratchDim=\dimen305
+\MPnumerator=\count353
+\makeMPintoPDFobject=\count354
+\everyMPtoPDFconversion=\toks45
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -678,7 +712,7 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: hypcap package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring OFF on input line 25.
+Package hyperref Info: Link coloring OFF on input line 26.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
  (/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
@@ -686,26 +720,33 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count349
+\c@section@level=\count355
 )
-LaTeX Info: Redefining \ref on input line 25.
-LaTeX Info: Redefining \pageref on input line 25.
-LaTeX Info: Redefining \nameref on input line 25.
+LaTeX Info: Redefining \ref on input line 26.
+LaTeX Info: Redefining \pageref on input line 26.
+LaTeX Info: Redefining \nameref on input line 26.
  (./main.out) (./main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
 
-LaTeX Info: Redefining \celsius on input line 25.
-Package gensymb Info: Faking symbols for \degree and \celsius on input line 25.
+LaTeX Info: Redefining \celsius on input line 26.
+Package gensymb Info: Faking symbols for \degree and \celsius on input line 26.
 
 
 Package gensymb Warning: Not defining \perthousand.
 
-LaTeX Info: Redefining \ohm on input line 25.
-Package gensymb Info: Using \Omega for \ohm on input line 25.
+LaTeX Info: Redefining \ohm on input line 26.
+Package gensymb Info: Using \Omega for \ohm on input line 26.
 
 Package gensymb Warning: Not defining \micro.
 
+(/usr/share/texlive/texmf-dist/tex/latex/pdflscape/pdflscape.sty
+Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
+)
 
 Package geometry Warning: `lmargin' and `rmargin' result in NEGATIVE (-180.67499pt).
     `width' should be shortened in length.
@@ -742,10 +783,10 @@ Package geometry Warning: `lmargin' and `rmargin' result in NEGATIVE (-180.67499
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<figures/uwlogo.PNG, id=138, 200.24812pt x 157.33781pt>
+<figures/uwlogo.PNG, id=146, 200.24812pt x 157.33781pt>
 File: figures/uwlogo.PNG Graphic file (type png)
 <use figures/uwlogo.PNG>
-Package pdftex.def Info: figures/uwlogo.PNG  used on input line 33.
+Package pdftex.def Info: figures/uwlogo.PNG  used on input line 34.
 (pdftex.def)             Requested size: 200.24763pt x 157.33742pt.
 [1
 
@@ -765,93 +806,93 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \openout5 = `main.toc'.
 
  [2] [3] [4] [5] [6] [7]
-<figures/stator.png, id=231, 295.1025pt x 286.82156pt>
+<figures/stator.png, id=241, 295.1025pt x 286.82156pt>
 File: figures/stator.png Graphic file (type png)
 <use figures/stator.png>
-Package pdftex.def Info: figures/stator.png  used on input line 188.
+Package pdftex.def Info: figures/stator.png  used on input line 189.
 (pdftex.def)             Requested size: 234.8775pt x 228.289pt.
  [8 <./figures/stator.png>]
-<figures/emf.jpg, id=240, 4095.3pt x 3083.52pt>
+<figures/emf.jpg, id=250, 4095.3pt x 3083.52pt>
 File: figures/emf.jpg Graphic file (type jpg)
 <use figures/emf.jpg>
-Package pdftex.def Info: figures/emf.jpg  used on input line 218.
+Package pdftex.def Info: figures/emf.jpg  used on input line 219.
 (pdftex.def)             Requested size: 234.8775pt x 176.8164pt.
  [9 <./figures/emf.jpg>]
-<cogging torque.png, id=248, 1337.99875pt x 737.75626pt>
+<cogging torque.png, id=258, 1337.99875pt x 737.75626pt>
 File: cogging torque.png Graphic file (type png)
 <use cogging torque.png>
-Package pdftex.def Info: cogging torque.png  used on input line 246.
+Package pdftex.def Info: cogging torque.png  used on input line 247.
 (pdftex.def)             Requested size: 234.8775pt x 129.50328pt.
-<figures/electricalSystemOverview.png, id=251, 2010.51125pt x 1078.0275pt>
+<figures/electricalSystemOverview.png, id=261, 2010.51125pt x 1078.0275pt>
 File: figures/electricalSystemOverview.png Graphic file (type png)
 <use figures/electricalSystemOverview.png>
-Package pdftex.def Info: figures/electricalSystemOverview.png  used on input line 276.
+Package pdftex.def Info: figures/electricalSystemOverview.png  used on input line 277.
 (pdftex.def)             Requested size: 469.75502pt x 251.8725pt.
  [10 <./cogging torque.png>] [11 <./figures/electricalSystemOverview.png>]
-<figures/primaryBoard3D.png, id=268, 1205.50375pt x 417.56pt>
+<figures/primaryBoard3D.png, id=278, 1205.50375pt x 417.56pt>
 File: figures/primaryBoard3D.png Graphic file (type png)
 <use figures/primaryBoard3D.png>
-Package pdftex.def Info: figures/primaryBoard3D.png  used on input line 290.
+Package pdftex.def Info: figures/primaryBoard3D.png  used on input line 291.
 (pdftex.def)             Requested size: 469.75502pt x 162.70757pt.
-<figures/encoderBoard3D.png, id=269, 796.9775pt x 583.17876pt>
+<figures/encoderBoard3D.png, id=279, 796.9775pt x 583.17876pt>
 File: figures/encoderBoard3D.png Graphic file (type png)
 <use figures/encoderBoard3D.png>
-Package pdftex.def Info: figures/encoderBoard3D.png  used on input line 297.
+Package pdftex.def Info: figures/encoderBoard3D.png  used on input line 298.
 (pdftex.def)             Requested size: 375.80544pt x 274.99281pt.
  [12 <./figures/primaryBoard3D.png>]
-<figures/imuBoard3D.png, id=278, 842.14626pt x 633.36626pt>
+<figures/imuBoard3D.png, id=288, 842.14626pt x 633.36626pt>
 File: figures/imuBoard3D.png Graphic file (type png)
 <use figures/imuBoard3D.png>
-Package pdftex.def Info: figures/imuBoard3D.png  used on input line 304.
+Package pdftex.def Info: figures/imuBoard3D.png  used on input line 305.
 (pdftex.def)             Requested size: 375.80544pt x 282.63475pt.
  [13 <./figures/encoderBoard3D.png> <./figures/imuBoard3D.png>] [14] [15]
-Overfull \hbox (18.34045pt too wide) in paragraph at lines 361--362
+Overfull \hbox (18.34045pt too wide) in paragraph at lines 362--363
  []\OT1/cmr/bx/n/10.95 Impedance Con-trol Outer Loop[] \OT1/cmr/m/n/10.95 The 200Hz Con-trolTask im-ple-ments a two-step vir-tual impedance
  []
 
 [16] [17] [18] [19]
-Overfull \hbox (16.53203pt too wide) in paragraph at lines 464--468
+Overfull \hbox (16.53203pt too wide) in paragraph at lines 465--469
  []\OT1/cmr/bx/n/10.95 Phase-Adaptive Impedance Con-trol.[] \OT1/cmr/m/n/10.95 The orig-i-nal de-sign pro-posed a sin-gle fixed set of impedance
  []
 
 [20]
-<figures/batteryPackAssembly.png, id=339, 365.11406pt x 505.13719pt>
+<figures/batteryPackAssembly.png, id=349, 365.11406pt x 505.13719pt>
 File: figures/batteryPackAssembly.png Graphic file (type png)
 <use figures/batteryPackAssembly.png>
-Package pdftex.def Info: figures/batteryPackAssembly.png  used on input line 503.
+Package pdftex.def Info: figures/batteryPackAssembly.png  used on input line 504.
 (pdftex.def)             Requested size: 234.8775pt x 324.95157pt.
  [21] [22 <./figures/batteryPackAssembly.png>] [23] [24] [25]
-<figures/thermal flow.png, id=371, 1284.8pt x 903.375pt>
+<figures/thermal flow.png, id=381, 1284.8pt x 903.375pt>
 File: figures/thermal flow.png Graphic file (type png)
 <use figures/thermal flow.png>
-Package pdftex.def Info: figures/thermal flow.png  used on input line 598.
+Package pdftex.def Info: figures/thermal flow.png  used on input line 595.
 (pdftex.def)             Requested size: 234.8775pt x 165.13681pt.
-<figures/temp plot.png, id=372, 498.663pt x 353.1594pt>
+<figures/temp plot.png, id=382, 498.663pt x 353.1594pt>
 File: figures/temp plot.png Graphic file (type png)
 <use figures/temp plot.png>
-Package pdftex.def Info: figures/temp plot.png  used on input line 604.
+Package pdftex.def Info: figures/temp plot.png  used on input line 601.
 (pdftex.def)             Requested size: 234.8775pt x 166.34058pt.
  [26 <./figures/thermal flow.png>]
-Overfull \hbox (36.22937pt too wide) in paragraph at lines 621--630
+Overfull \hbox (36.22937pt too wide) in paragraph at lines 618--627
  [][] 
  []
 
-<figures/qdd blown up.png, id=384, 867.24pt x 1228.59pt>
+<figures/qdd blown up.png, id=394, 867.24pt x 1228.59pt>
 File: figures/qdd blown up.png Graphic file (type png)
 <use figures/qdd blown up.png>
-Package pdftex.def Info: figures/qdd blown up.png  used on input line 655.
+Package pdftex.def Info: figures/qdd blown up.png  used on input line 652.
 (pdftex.def)             Requested size: 234.8775pt x 332.73605pt.
 [27 <./figures/temp plot.png>]
-<figures/motor.png, id=394, 520.19344pt x 526.96875pt>
+<figures/motor.png, id=404, 520.19344pt x 526.96875pt>
 File: figures/motor.png Graphic file (type png)
 <use figures/motor.png>
-Package pdftex.def Info: figures/motor.png  used on input line 661.
+Package pdftex.def Info: figures/motor.png  used on input line 658.
 (pdftex.def)             Requested size: 234.8775pt x 237.93782pt.
  [28 <./figures/qdd blown up.png>] [29 <./figures/motor.png>] [30]
-<figures/final.jpg, id=419, 3083.52pt x 4095.3pt>
+<figures/final.jpg, id=429, 3083.52pt x 4095.3pt>
 File: figures/final.jpg Graphic file (type jpg)
 <use figures/final.jpg>
-Package pdftex.def Info: figures/final.jpg  used on input line 772.
+Package pdftex.def Info: figures/final.jpg  used on input line 769.
 (pdftex.def)             Requested size: 234.8775pt x 311.94592pt.
  [31] [32 <./figures/final.jpg>] [33] [34] [35] (./main.bbl
 
@@ -862,28 +903,382 @@ LaTeX Warning: Empty `thebibliography' environment on input line 24.
 ] [37
 
 ] [38] [39]
-<figures/blown up.png, id=467, 4974.585pt x 3517.14pt>
+<figures/blown up.png, id=477, 4974.585pt x 3517.14pt>
 File: figures/blown up.png Graphic file (type png)
 <use figures/blown up.png>
-Package pdftex.def Info: figures/blown up.png  used on input line 982.
+Package pdftex.def Info: figures/blown up.png  used on input line 942.
 (pdftex.def)             Requested size: 234.8775pt x 166.0462pt.
- [40 <./figures/blown up.png>] (./main.aux)
+
+
+pdfTeX warning: pdflatex (file ./drawings/XL2602030163-1(B).pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<drawings/XL2602030163-1(B).pdf, id=478, 845.1575pt x 597.23125pt>
+File: drawings/XL2602030163-1(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-1(B).pdf>
+Package pdftex.def Info: drawings/XL2602030163-1(B).pdf  used on input line 947.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+
+
+pdfTeX warning: pdflatex (file ./drawings/XL2602030163-1(B).pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+File: drawings/XL2602030163-1(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-1(B).pdf>
+Package pdftex.def Info: drawings/XL2602030163-1(B).pdf  used on input line 947.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+
+
+pdfTeX warning: pdflatex (file ./drawings/XL2602030163-1(B).pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex (file ./drawings/XL2602030163-1(B).pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<drawings/XL2602030163-1(B).pdf, id=481, page=1, 845.1575pt x 597.23125pt>
+File: drawings/XL2602030163-1(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-1(B).pdf, page 1>
+Package pdftex.def Info: drawings/XL2602030163-1(B).pdf , page1 used on input line 947.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+File: drawings/XL2602030163-1(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-1(B).pdf, page 1>
+Package pdftex.def Info: drawings/XL2602030163-1(B).pdf , page1 used on input line 947.
+(pdftex.def)             Requested size: 760.63474pt x 537.50316pt.
+[40 <./figures/blown up.png>]
+File: drawings/XL2602030163-1(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-1(B).pdf, page 1>
+Package pdftex.def Info: drawings/XL2602030163-1(B).pdf , page1 used on input line 947.
+(pdftex.def)             Requested size: 760.63474pt x 537.50316pt.
+File: drawings/XL2602030163-1(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-1(B).pdf, page 1>
+Package pdftex.def Info: drawings/XL2602030163-1(B).pdf , page1 used on input line 947.
+(pdftex.def)             Requested size: 760.63474pt x 537.50316pt.
+File: drawings/XL2602030163-1(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-1(B).pdf, page 1>
+Package pdftex.def Info: drawings/XL2602030163-1(B).pdf , page1 used on input line 947.
+(pdftex.def)             Requested size: 760.63474pt x 537.50316pt.
+ [41 <./drawings/XL2602030163-1(B).pdf, page is rotated 270 degrees>]
+
+pdfTeX warning: pdflatex (file ./drawings/XL2602030163-2(B).pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<drawings/XL2602030163-2(B).pdf, id=511, 845.1575pt x 597.23125pt>
+File: drawings/XL2602030163-2(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-2(B).pdf>
+Package pdftex.def Info: drawings/XL2602030163-2(B).pdf  used on input line 948.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+
+
+pdfTeX warning: pdflatex (file ./drawings/XL2602030163-2(B).pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+File: drawings/XL2602030163-2(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-2(B).pdf>
+Package pdftex.def Info: drawings/XL2602030163-2(B).pdf  used on input line 948.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+
+
+pdfTeX warning: pdflatex (file ./drawings/XL2602030163-2(B).pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex (file ./drawings/XL2602030163-2(B).pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<drawings/XL2602030163-2(B).pdf, id=514, page=1, 845.1575pt x 597.23125pt>
+File: drawings/XL2602030163-2(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-2(B).pdf, page 1>
+Package pdftex.def Info: drawings/XL2602030163-2(B).pdf , page1 used on input line 948.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+File: drawings/XL2602030163-2(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-2(B).pdf, page 1>
+Package pdftex.def Info: drawings/XL2602030163-2(B).pdf , page1 used on input line 948.
+(pdftex.def)             Requested size: 760.63474pt x 537.50316pt.
+File: drawings/XL2602030163-2(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-2(B).pdf, page 1>
+Package pdftex.def Info: drawings/XL2602030163-2(B).pdf , page1 used on input line 948.
+(pdftex.def)             Requested size: 760.63474pt x 537.50316pt.
+File: drawings/XL2602030163-2(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-2(B).pdf, page 1>
+Package pdftex.def Info: drawings/XL2602030163-2(B).pdf , page1 used on input line 948.
+(pdftex.def)             Requested size: 760.63474pt x 537.50316pt.
+File: drawings/XL2602030163-2(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-2(B).pdf, page 1>
+Package pdftex.def Info: drawings/XL2602030163-2(B).pdf , page1 used on input line 948.
+(pdftex.def)             Requested size: 760.63474pt x 537.50316pt.
+[42 <./drawings/XL2602030163-2(B).pdf, page is rotated 270 degrees>]
+
+pdfTeX warning: pdflatex (file ./drawings/XL2602030163-3(B).pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<drawings/XL2602030163-3(B).pdf, id=537, 845.1575pt x 597.23125pt>
+File: drawings/XL2602030163-3(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-3(B).pdf>
+Package pdftex.def Info: drawings/XL2602030163-3(B).pdf  used on input line 949.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+
+
+pdfTeX warning: pdflatex (file ./drawings/XL2602030163-3(B).pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+File: drawings/XL2602030163-3(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-3(B).pdf>
+Package pdftex.def Info: drawings/XL2602030163-3(B).pdf  used on input line 949.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+
+
+pdfTeX warning: pdflatex (file ./drawings/XL2602030163-3(B).pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex (file ./drawings/XL2602030163-3(B).pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<drawings/XL2602030163-3(B).pdf, id=540, page=1, 845.1575pt x 597.23125pt>
+File: drawings/XL2602030163-3(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-3(B).pdf, page 1>
+Package pdftex.def Info: drawings/XL2602030163-3(B).pdf , page1 used on input line 949.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+File: drawings/XL2602030163-3(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-3(B).pdf, page 1>
+Package pdftex.def Info: drawings/XL2602030163-3(B).pdf , page1 used on input line 949.
+(pdftex.def)             Requested size: 760.63474pt x 537.50316pt.
+File: drawings/XL2602030163-3(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-3(B).pdf, page 1>
+Package pdftex.def Info: drawings/XL2602030163-3(B).pdf , page1 used on input line 949.
+(pdftex.def)             Requested size: 760.63474pt x 537.50316pt.
+File: drawings/XL2602030163-3(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-3(B).pdf, page 1>
+Package pdftex.def Info: drawings/XL2602030163-3(B).pdf , page1 used on input line 949.
+(pdftex.def)             Requested size: 760.63474pt x 537.50316pt.
+File: drawings/XL2602030163-3(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-3(B).pdf, page 1>
+Package pdftex.def Info: drawings/XL2602030163-3(B).pdf , page1 used on input line 949.
+(pdftex.def)             Requested size: 760.63474pt x 537.50316pt.
+[43 <./drawings/XL2602030163-3(B).pdf, page is rotated 270 degrees>]
+
+pdfTeX warning: pdflatex (file ./drawings/XL2602030163-4(B).pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<drawings/XL2602030163-4(B).pdf, id=562, 845.1575pt x 597.23125pt>
+File: drawings/XL2602030163-4(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-4(B).pdf>
+Package pdftex.def Info: drawings/XL2602030163-4(B).pdf  used on input line 950.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+
+
+pdfTeX warning: pdflatex (file ./drawings/XL2602030163-4(B).pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+File: drawings/XL2602030163-4(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-4(B).pdf>
+Package pdftex.def Info: drawings/XL2602030163-4(B).pdf  used on input line 950.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+
+
+pdfTeX warning: pdflatex (file ./drawings/XL2602030163-4(B).pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex (file ./drawings/XL2602030163-4(B).pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<drawings/XL2602030163-4(B).pdf, id=565, page=1, 845.1575pt x 597.23125pt>
+File: drawings/XL2602030163-4(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-4(B).pdf, page 1>
+Package pdftex.def Info: drawings/XL2602030163-4(B).pdf , page1 used on input line 950.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+File: drawings/XL2602030163-4(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-4(B).pdf, page 1>
+Package pdftex.def Info: drawings/XL2602030163-4(B).pdf , page1 used on input line 950.
+(pdftex.def)             Requested size: 760.63474pt x 537.50316pt.
+File: drawings/XL2602030163-4(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-4(B).pdf, page 1>
+Package pdftex.def Info: drawings/XL2602030163-4(B).pdf , page1 used on input line 950.
+(pdftex.def)             Requested size: 760.63474pt x 537.50316pt.
+File: drawings/XL2602030163-4(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-4(B).pdf, page 1>
+Package pdftex.def Info: drawings/XL2602030163-4(B).pdf , page1 used on input line 950.
+(pdftex.def)             Requested size: 760.63474pt x 537.50316pt.
+File: drawings/XL2602030163-4(B).pdf Graphic file (type pdf)
+<use drawings/XL2602030163-4(B).pdf, page 1>
+Package pdftex.def Info: drawings/XL2602030163-4(B).pdf , page1 used on input line 950.
+(pdftex.def)             Requested size: 760.63474pt x 537.50316pt.
+[44 <./drawings/XL2602030163-4(B).pdf, page is rotated 270 degrees>]
+
+pdfTeX warning: pdflatex (file ./drawings/XL2602030163-5.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<drawings/XL2602030163-5.pdf, id=588, 845.1575pt x 597.23125pt>
+File: drawings/XL2602030163-5.pdf Graphic file (type pdf)
+<use drawings/XL2602030163-5.pdf>
+Package pdftex.def Info: drawings/XL2602030163-5.pdf  used on input line 951.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+
+
+pdfTeX warning: pdflatex (file ./drawings/XL2602030163-5.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+File: drawings/XL2602030163-5.pdf Graphic file (type pdf)
+<use drawings/XL2602030163-5.pdf>
+Package pdftex.def Info: drawings/XL2602030163-5.pdf  used on input line 951.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+
+
+pdfTeX warning: pdflatex (file ./drawings/XL2602030163-5.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex (file ./drawings/XL2602030163-5.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<drawings/XL2602030163-5.pdf, id=591, page=1, 845.1575pt x 597.23125pt>
+File: drawings/XL2602030163-5.pdf Graphic file (type pdf)
+<use drawings/XL2602030163-5.pdf, page 1>
+Package pdftex.def Info: drawings/XL2602030163-5.pdf , page1 used on input line 951.
+(pdftex.def)             Requested size: 845.15544pt x 597.22978pt.
+File: drawings/XL2602030163-5.pdf Graphic file (type pdf)
+<use drawings/XL2602030163-5.pdf, page 1>
+Package pdftex.def Info: drawings/XL2602030163-5.pdf , page1 used on input line 951.
+(pdftex.def)             Requested size: 760.63474pt x 537.50316pt.
+File: drawings/XL2602030163-5.pdf Graphic file (type pdf)
+<use drawings/XL2602030163-5.pdf, page 1>
+Package pdftex.def Info: drawings/XL2602030163-5.pdf , page1 used on input line 951.
+(pdftex.def)             Requested size: 760.63474pt x 537.50316pt.
+File: drawings/XL2602030163-5.pdf Graphic file (type pdf)
+<use drawings/XL2602030163-5.pdf, page 1>
+Package pdftex.def Info: drawings/XL2602030163-5.pdf , page1 used on input line 951.
+(pdftex.def)             Requested size: 760.63474pt x 537.50316pt.
+File: drawings/XL2602030163-5.pdf Graphic file (type pdf)
+<use drawings/XL2602030163-5.pdf, page 1>
+Package pdftex.def Info: drawings/XL2602030163-5.pdf , page1 used on input line 951.
+(pdftex.def)             Requested size: 760.63474pt x 537.50316pt.
+[45 <./drawings/XL2602030163-5.pdf, page is rotated 270 degrees>]
+
+pdfTeX warning: pdflatex (file ./documents/BOM_PRIMARY_BOARD.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<documents/BOM_PRIMARY_BOARD.pdf, id=613, 614.295pt x 794.97pt>
+File: documents/BOM_PRIMARY_BOARD.pdf Graphic file (type pdf)
+<use documents/BOM_PRIMARY_BOARD.pdf>
+Package pdftex.def Info: documents/BOM_PRIMARY_BOARD.pdf  used on input line 955.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+
+
+pdfTeX warning: pdflatex (file ./documents/BOM_PRIMARY_BOARD.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+File: documents/BOM_PRIMARY_BOARD.pdf Graphic file (type pdf)
+<use documents/BOM_PRIMARY_BOARD.pdf>
+Package pdftex.def Info: documents/BOM_PRIMARY_BOARD.pdf  used on input line 955.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+
+
+pdfTeX warning: pdflatex (file ./documents/BOM_PRIMARY_BOARD.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex (file ./documents/BOM_PRIMARY_BOARD.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<documents/BOM_PRIMARY_BOARD.pdf, id=616, page=1, 614.295pt x 794.97pt>
+File: documents/BOM_PRIMARY_BOARD.pdf Graphic file (type pdf)
+<use documents/BOM_PRIMARY_BOARD.pdf, page 1>
+Package pdftex.def Info: documents/BOM_PRIMARY_BOARD.pdf , page1 used on input line 955.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+File: documents/BOM_PRIMARY_BOARD.pdf Graphic file (type pdf)
+<use documents/BOM_PRIMARY_BOARD.pdf, page 1>
+Package pdftex.def Info: documents/BOM_PRIMARY_BOARD.pdf , page1 used on input line 955.
+(pdftex.def)             Requested size: 552.86038pt x 715.4664pt.
+[46]
+File: documents/BOM_PRIMARY_BOARD.pdf Graphic file (type pdf)
+<use documents/BOM_PRIMARY_BOARD.pdf, page 1>
+Package pdftex.def Info: documents/BOM_PRIMARY_BOARD.pdf , page1 used on input line 955.
+(pdftex.def)             Requested size: 552.86038pt x 715.4664pt.
+File: documents/BOM_PRIMARY_BOARD.pdf Graphic file (type pdf)
+<use documents/BOM_PRIMARY_BOARD.pdf, page 1>
+Package pdftex.def Info: documents/BOM_PRIMARY_BOARD.pdf , page1 used on input line 955.
+(pdftex.def)             Requested size: 552.86038pt x 715.4664pt.
+File: documents/BOM_PRIMARY_BOARD.pdf Graphic file (type pdf)
+<use documents/BOM_PRIMARY_BOARD.pdf, page 1>
+Package pdftex.def Info: documents/BOM_PRIMARY_BOARD.pdf , page1 used on input line 955.
+(pdftex.def)             Requested size: 552.86038pt x 715.4664pt.
+ [47 <./documents/BOM_PRIMARY_BOARD.pdf>]
+
+pdfTeX warning: pdflatex (file ./documents/BOM_PRIMARY_BOARD.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<documents/BOM_PRIMARY_BOARD.pdf, id=634, page=2, 614.295pt x 794.97pt>
+File: documents/BOM_PRIMARY_BOARD.pdf Graphic file (type pdf)
+<use documents/BOM_PRIMARY_BOARD.pdf, page 2>
+Package pdftex.def Info: documents/BOM_PRIMARY_BOARD.pdf , page2 used on input line 955.
+(pdftex.def)             Requested size: 552.86038pt x 715.4664pt.
+File: documents/BOM_PRIMARY_BOARD.pdf Graphic file (type pdf)
+<use documents/BOM_PRIMARY_BOARD.pdf, page 2>
+Package pdftex.def Info: documents/BOM_PRIMARY_BOARD.pdf , page2 used on input line 955.
+(pdftex.def)             Requested size: 552.86038pt x 715.4664pt.
+File: documents/BOM_PRIMARY_BOARD.pdf Graphic file (type pdf)
+<use documents/BOM_PRIMARY_BOARD.pdf, page 2>
+Package pdftex.def Info: documents/BOM_PRIMARY_BOARD.pdf , page2 used on input line 955.
+(pdftex.def)             Requested size: 552.86038pt x 715.4664pt.
+[48 <./documents/BOM_PRIMARY_BOARD.pdf>]
+
+pdfTeX warning: pdflatex (file ./documents/BOM_ENCODER_BOARD.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<documents/BOM_ENCODER_BOARD.pdf, id=640, 614.295pt x 794.97pt>
+File: documents/BOM_ENCODER_BOARD.pdf Graphic file (type pdf)
+<use documents/BOM_ENCODER_BOARD.pdf>
+Package pdftex.def Info: documents/BOM_ENCODER_BOARD.pdf  used on input line 956.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+
+
+pdfTeX warning: pdflatex (file ./documents/BOM_ENCODER_BOARD.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+File: documents/BOM_ENCODER_BOARD.pdf Graphic file (type pdf)
+<use documents/BOM_ENCODER_BOARD.pdf>
+Package pdftex.def Info: documents/BOM_ENCODER_BOARD.pdf  used on input line 956.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+
+
+pdfTeX warning: pdflatex (file ./documents/BOM_ENCODER_BOARD.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex (file ./documents/BOM_ENCODER_BOARD.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<documents/BOM_ENCODER_BOARD.pdf, id=643, page=1, 614.295pt x 794.97pt>
+File: documents/BOM_ENCODER_BOARD.pdf Graphic file (type pdf)
+<use documents/BOM_ENCODER_BOARD.pdf, page 1>
+Package pdftex.def Info: documents/BOM_ENCODER_BOARD.pdf , page1 used on input line 956.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+File: documents/BOM_ENCODER_BOARD.pdf Graphic file (type pdf)
+<use documents/BOM_ENCODER_BOARD.pdf, page 1>
+Package pdftex.def Info: documents/BOM_ENCODER_BOARD.pdf , page1 used on input line 956.
+(pdftex.def)             Requested size: 552.86038pt x 715.4664pt.
+File: documents/BOM_ENCODER_BOARD.pdf Graphic file (type pdf)
+<use documents/BOM_ENCODER_BOARD.pdf, page 1>
+Package pdftex.def Info: documents/BOM_ENCODER_BOARD.pdf , page1 used on input line 956.
+(pdftex.def)             Requested size: 552.86038pt x 715.4664pt.
+File: documents/BOM_ENCODER_BOARD.pdf Graphic file (type pdf)
+<use documents/BOM_ENCODER_BOARD.pdf, page 1>
+Package pdftex.def Info: documents/BOM_ENCODER_BOARD.pdf , page1 used on input line 956.
+(pdftex.def)             Requested size: 552.86038pt x 715.4664pt.
+File: documents/BOM_ENCODER_BOARD.pdf Graphic file (type pdf)
+<use documents/BOM_ENCODER_BOARD.pdf, page 1>
+Package pdftex.def Info: documents/BOM_ENCODER_BOARD.pdf , page1 used on input line 956.
+(pdftex.def)             Requested size: 552.86038pt x 715.4664pt.
+[49 <./documents/BOM_ENCODER_BOARD.pdf>]
+
+pdfTeX warning: pdflatex (file ./documents/BOM_IMU_BOARD.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<documents/BOM_IMU_BOARD.pdf, id=657, 614.295pt x 794.97pt>
+File: documents/BOM_IMU_BOARD.pdf Graphic file (type pdf)
+<use documents/BOM_IMU_BOARD.pdf>
+Package pdftex.def Info: documents/BOM_IMU_BOARD.pdf  used on input line 957.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+
+
+pdfTeX warning: pdflatex (file ./documents/BOM_IMU_BOARD.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+File: documents/BOM_IMU_BOARD.pdf Graphic file (type pdf)
+<use documents/BOM_IMU_BOARD.pdf>
+Package pdftex.def Info: documents/BOM_IMU_BOARD.pdf  used on input line 957.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+
+
+pdfTeX warning: pdflatex (file ./documents/BOM_IMU_BOARD.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex (file ./documents/BOM_IMU_BOARD.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<documents/BOM_IMU_BOARD.pdf, id=660, page=1, 614.295pt x 794.97pt>
+File: documents/BOM_IMU_BOARD.pdf Graphic file (type pdf)
+<use documents/BOM_IMU_BOARD.pdf, page 1>
+Package pdftex.def Info: documents/BOM_IMU_BOARD.pdf , page1 used on input line 957.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+File: documents/BOM_IMU_BOARD.pdf Graphic file (type pdf)
+<use documents/BOM_IMU_BOARD.pdf, page 1>
+Package pdftex.def Info: documents/BOM_IMU_BOARD.pdf , page1 used on input line 957.
+(pdftex.def)             Requested size: 552.86038pt x 715.4664pt.
+File: documents/BOM_IMU_BOARD.pdf Graphic file (type pdf)
+<use documents/BOM_IMU_BOARD.pdf, page 1>
+Package pdftex.def Info: documents/BOM_IMU_BOARD.pdf , page1 used on input line 957.
+(pdftex.def)             Requested size: 552.86038pt x 715.4664pt.
+File: documents/BOM_IMU_BOARD.pdf Graphic file (type pdf)
+<use documents/BOM_IMU_BOARD.pdf, page 1>
+Package pdftex.def Info: documents/BOM_IMU_BOARD.pdf , page1 used on input line 957.
+(pdftex.def)             Requested size: 552.86038pt x 715.4664pt.
+File: documents/BOM_IMU_BOARD.pdf Graphic file (type pdf)
+<use documents/BOM_IMU_BOARD.pdf, page 1>
+Package pdftex.def Info: documents/BOM_IMU_BOARD.pdf , page1 used on input line 957.
+(pdftex.def)             Requested size: 552.86038pt x 715.4664pt.
+[50 <./documents/BOM_IMU_BOARD.pdf>] (./main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 255FDFA15330F72C2D9808B0EA036B7B;6030.
+(rerunfilecheck)             Checksum: 0E153E1609BF1DC3C684D413E8592D7C;6374.
  ) 
 Here is how much of TeX's memory you used:
- 25877 strings out of 480247
- 497222 string characters out of 5896150
- 778490 words of memory out of 5000000
- 43217 multiletter control sequences out of 15000+600000
+ 26849 strings out of 480247
+ 516310 string characters out of 5896150
+ 792601 words of memory out of 5000000
+ 44134 multiletter control sequences out of 15000+600000
  481591 words of font info for 74 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 99i,14n,103p,1174b,1028s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 99i,18n,103p,1174b,1036s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on main.pdf (41 pages, 13997455 bytes).
+Output written on main.pdf (51 pages, 14852386 bytes).
 PDF statistics:
- 586 PDF objects out of 1000 (max. 8388607)
- 478 compressed objects within 5 object streams
- 140 named destinations out of 1000 (max. 500000)
- 352 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 788 PDF objects out of 1000 (max. 8388607)
+ 604 compressed objects within 7 object streams
+ 152 named destinations out of 1000 (max. 500000)
+ 533 words of extra memory for PDF output out of 10000 (max. 10000000)
 

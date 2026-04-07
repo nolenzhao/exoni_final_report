@@ -17,6 +17,7 @@
 \usepackage[nottoc,numbib]{tocbibind}
 \usepackage{gensymb}
 \usepackage{pgfgantt}
+\usepackage{pdfpages}
 
 \title{Exoni Final Design Report}
 \author{Egor Gorelyy, Taim Al-Dabbagh, Hasan Khan, Nolen Zhao}
@@ -506,11 +507,7 @@ Aside from the PCBAs, two battery packs were made. Using the 21700 Molicell Li-I
     \end{figure}
 
 \subsection{Commissioning (Component Functional Tests)}
-\subsubsection{Motor Bring-up \& Testing}
-% TODO: No-load tests, phase resistance checks, back-EMF measurement procedure.
-
 \subsubsection{PCB \& Battery Bring-up}
-% TODO: Voltage checks, continuity, BMS testing on the 8S pack.
 All 3 PCBAs (primary, encoder, and IMU) were inspected visually and tested. Inspection was done to look for quality of soldering, if potential issues exist like a short, cracks within components, and so forth. A digital multimeter was used for continuity testing to verify no shorts exist. After checking no clear problem exists, a USB-C was plugged in. Later on, a problem with turn-on time with the BMS was found after trying to plug in the board with a USB-C coming from a different laptop where power was switching on and off. This was fixed by adding additional capacitance on the gate-source of the back-to-back high-side N-Channel MOSFETs to slow down the turn-on time. After coming across small bugs and modifications on the board to overcome such bugs, the primary board was verified to work with a functioning BMS, USB-PD IC, STM32/ESP32, and sensors. The power-path management and switchover between battery and USB-C was verified to work well, along with charging the battery through USB-C.
 
 The battery was verified through the assembly of it. The balancing connector was used to check the voltage between each cell to verify the cells are being correctly spot welded together in the right order. The primary board was able to be powered by the custom 8S1P battery pack.
@@ -796,51 +793,22 @@ This architecture keeps per-activity models small and interpretable while scalin
 
 % --- 5. TEAMWORK EFFORT (5%) ---
 \section{Teamwork Effort}
-% TODO: 1--2 pages. Per-member contributions across mechanical, electrical, and firmware domains
-Egor Gorelyy handled all mechanical work behind Exoni.
- Tasks included:
- \begin{itemize}
-        \item Requirement gathering, design, simulation of a fully custom motor.
-        \item Full fabrication of a custom motor.
-        \item Motor testing and characterization.
-        \item Ergonomic cuff design and testing.
-        \item Basically everything else on the mechanical side.
-        \item Working with Taim (electrical) to fit custom cables, PCBAs, and more to ensure integration
-    \end{itemize}
-Taim Al-Dabbagh handled all electrical work behind Exoni. Tasks included:
-    \begin{itemize}
-        \item Architecting the initial electrical system for minimum viable product
-        \item Designing and assembling the devboard
-        \item Board-bring up for the devboard
-        \item Reiteration and design of 3 PCBAs
-        \item Working with Egor (mechanical) to fit custom cables, PCBAs, and more to ensure integration
-        \item Worked with manufacturers for PCBAs and custom cables
-        \item Board bring-up and validation of PCBAs and cables
-        \item Supporting team with other small tasks (motor assembly for example)
-    \end{itemize}
-Hasan Khan handled all firmware and half of embedded software work behind Exoni. Tasks included:
-\begin{itemize}
-\item Architecting dual-task FreeRTOS firmware for motor and control loops.
-\item Implementing the full Field Oriented Control (FOC) pipeline and SVPWM.
-\item Developing SPI drivers for magnetic encoders and dual IMUs.
-\item Creating encoder calibration and electrical angle alignment routines.
-\item Designing the motor control state machine and open-loop soft-start.
-\item Implementing the impedance control loop for compliant knee assistance.
-\item Developing binary telemetry for data transmission.
-\item Commissioning and validating firmware on custom hardware.
-\item Working with Taim (electrical) to debug hardware/firmware integration.
-\end{itemize}
 
-Nolen Zhao handled the higher level controls algorithm construction and low latency performance software. Tasks included: 
-\begin{itemize}
-    \item Architecting multi-layer control pipeline for low-latency communication.
-    \item Converting raw sensor reads into torque target and current control for input to FOC.
-    \item Profiling performance of critical path for control loop to increase resolution and make system faster to respond.
-    \item Developing telemetry interface for live IMU, torque, and current monitoring through WiFi and bluetooth.
-    \item Develop impedance control based on reference gait cycle and spring-damper simulation.
-    \item Cleaned motion-capture (MOCAP) to drop corrupted samples and outliers.
-    \item Trained and fine tuned random forest classification ML model on gathered MOCAP gait data.
-\end{itemize}
+\subsection{Team Structure and Collaboration}
+
+The Exoni team was organized around three parallel workstreams --- mechanical, electrical, and firmware/software --- each owned by one or two members. This division allowed all three subsystems to advance simultaneously rather than sequentially, which was essential given the tight timeline. Integration work was handled through regular cross-domain checkpoints: Egor and Taim coordinated closely to ensure PCBAs and cables fit within the mechanical assembly, and Taim and Hasan worked together throughout PCB bring-up to resolve hardware/firmware integration issues as they emerged.
+
+A shared git repository was used across all firmware and software work, with each contributor working on feature branches and merging after review. For mechanical and electrical design, shared folders in KiCad and CAD tools were used to keep the latest design files accessible to the full team. As the PCBA delivery slipped roughly two weeks past the planned date (Section~3.3), the team adapted by front-loading all work that did not depend on final hardware --- motor characterization, firmware unit testing against the devboard, and MOCAP data collection --- so that the integration window remained as wide as possible.
+
+\subsection{Individual Contributions}
+
+\textbf{Egor Gorelyy} was responsible for all mechanical design and fabrication. He led the electromagnetic simulation work in Ansys Maxwell that selected the 8110 stator frame and the Halbach rotor configuration, ran the motor thermal simulations in SimScale that drove the housing design changes, and physically fabricated both motor iterations. Egor also designed and iterated on the ergonomic knee cuffs and structural frame, managed the battery thermal simulation work, and coordinated with Taim during final assembly to ensure mechanical clearances accommodated the PCBAs and cable routing.
+
+\textbf{Taim Al-Dabbagh} was responsible for all electrical design. He architected the full electrical system from the initial block diagram through to the three production PCBAs, designed and assembled a devboard for early firmware validation, and managed the JLCPCB fabrication and assembly process including component sourcing and custom cable orders. Taim led all PCB bring-up work --- visual inspection, continuity testing, the BMS turn-on timing fix, and battery pack assembly and validation. He also supported the wider team on smaller integration tasks such as motor phase wiring during motor assembly.
+
+\textbf{Hasan Khan} was responsible for the core firmware. He architected the dual-task FreeRTOS scheduling model, implemented the full FOC pipeline (Clarke and Park transforms, PI current controllers, SVPWM with third-harmonic injection, and the DRV8323 gate driver interface), wrote SPI drivers for the AS5048A encoder and both LSM6DSVETR IMUs, and developed the encoder electrical angle calibration routine. Hasan also implemented the impedance control loop and the binary telemetry protocol, and conducted all firmware commissioning on the final hardware, working closely with Taim to resolve hardware/firmware integration issues that arose during board bring-up.
+
+\textbf{Nolen Zhao} was responsible for the higher-level software pipeline: the gait classifier and the end-to-end control data flow. He architected the low-latency sensor-to-torque pipeline, profiled the STM32 critical path to confirm the 200Hz budget, and built the Wi-Fi telemetry interface used for live monitoring during testing. Nolen designed and ran the MOCAP data collection pipeline, wrote the cleaning and labelling scripts to align MOCAP ground-truth labels with Exoni's on-device sensor stream, and trained and tuned the random forest gait classifier including the windowed feature engineering that provided the largest single accuracy improvement during development.
 
 
 % --- 8. REPORT QUALITY & CLARITY (References) ---
@@ -968,21 +936,25 @@ The deadband prevents sign-flip chatter when the joint is stationary. The 0.26Nm
 where $K_t = 0.97$Nm/A is the measured torque constant from the second motor iteration (within 5\% of simulation) and $N_\text{gear} = 8.4$ is the planetary gearbox ratio. The result is clamped to $\pm10$~A before being written to the 1~kHz FOC inner loop.
 
 \section{As-Built Engineering Drawings}
-% TODO: Replace placeholder text. Even a firmware architecture block diagram counts here.
-% Suggested figures to add:
-%   1. FreeRTOS task diagram: StartDefaultTask (1 kHz) and ControlTask (200 Hz),
-%      showing data flow between tasks (shared volatile: ctrl_Iq, gait_phase, etc.)
-%      and the FOC signal chain (ADC -> Clarke -> Park -> PI -> SVPWM -> TIM1)
-%   2. ML pipeline diagram: raw sensors -> feature extraction -> RF classifier ->
-%      phase selection -> impedance law -> I_q -> FOC
-% These can be drawn in draw.io / TikZ / any tool and included as figures.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\linewidth]{figures/blown up.png}
     \caption{Blown Up System Assembly}
     \label{fig:system_exploded}
 \end{figure}
+
+\includepdf[pages=-,pagecommand={\thispagestyle{plain}},scale=0.9]{drawings/XL2602030163-1(B).pdf}
+\includepdf[pages=-,pagecommand={\thispagestyle{plain}},scale=0.9]{drawings/XL2602030163-2(B).pdf}
+\includepdf[pages=-,pagecommand={\thispagestyle{plain}},scale=0.9]{drawings/XL2602030163-3(B).pdf}
+\includepdf[pages=-,pagecommand={\thispagestyle{plain}},scale=0.9]{drawings/XL2602030163-4(B).pdf}
+\includepdf[pages=-,pagecommand={\thispagestyle{plain}},scale=0.9]{drawings/XL2602030163-5.pdf}
+
+\section{Bill of Materials}
+
+\includepdf[pages=-,pagecommand={\thispagestyle{plain}},scale=0.9]{documents/BOM_PRIMARY_BOARD.pdf}
+\includepdf[pages=-,pagecommand={\thispagestyle{plain}},scale=0.9]{documents/BOM_ENCODER_BOARD.pdf}
+\includepdf[pages=-,pagecommand={\thispagestyle{plain}},scale=0.9]{documents/BOM_IMU_BOARD.pdf}
 
 
 \end{document}
